@@ -10,11 +10,14 @@ package practisepr;
  */
 public class PractisePr {
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
-        // TODO code application logic here
+      
+        System.out.println("Celcius 35 is Fahrenheit degree: ");
+        System.out.println(35*9/5+32);
+        
+        
+        
     }
     
 }
