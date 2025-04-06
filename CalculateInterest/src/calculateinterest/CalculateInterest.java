@@ -8,7 +8,7 @@ public class CalculateInterest {
 
         Scanner s = new Scanner(System.in);
 
-        System.out.println("Enter annual interest rate like as 7.25% ");
+        System.out.println("Enter annual interest rate like as 15% ");
         double annualInterest = s.nextDouble();
 
         double monthlyInterestRate = annualInterest / 1200;
@@ -16,10 +16,11 @@ public class CalculateInterest {
         System.out.println("Enter Number of Year ");
         int numberOfYear = s.nextInt();
 
-        System.out.println("Enter Invest Amount ");
+        System.out.println("Enter Loan Amount ");
         double loanAmount = s.nextDouble();
 
-        double monthlyPayment = loanAmount * monthlyInterestRate / (1 - 1 / Math.pow(1 + monthlyInterestRate, numberOfYear * 12));
+        double monthlyPayment = loanAmount * monthlyInterestRate / (1
+                - 1 / Math.pow(1 + monthlyInterestRate, numberOfYear * 12));
 
         double totalPayment = monthlyPayment * numberOfYear * 12;
 
