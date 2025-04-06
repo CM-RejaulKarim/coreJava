@@ -27,12 +27,14 @@ public class RadiusCalculationUsingPrompt {
         System.out.println("enter radius ");
         double radius = s.nextDouble();
 
-//        if (radius > 1) {
+//        if (radius < 1) {
+//        System.out.println("Enter Valid Value ");
+//            radius = s.nextDouble();
+
 //            areaOfCircle = Math.PI * Math.pow(radius, 2);
 //
 //        } else {
-//            System.out.println("Enter Valid Value ");
-//            radius = s.nextDouble();
+//            
 //            areaOfCircle = Math.PI * Math.pow(radius, 2);
 //        }
         if (radius > 1) {
