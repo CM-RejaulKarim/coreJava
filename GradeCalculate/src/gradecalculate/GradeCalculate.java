@@ -9,7 +9,7 @@ public class GradeCalculate {
         Scanner s = new Scanner(System.in);
 
         System.out.println("Input Mark: ");
-        byte mark = s.nextByte();
+        int mark = s.nextInt();
 
         if (mark < 60) {
             System.out.println(mark + " is Grade F");
