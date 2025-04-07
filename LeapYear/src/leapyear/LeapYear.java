@@ -11,19 +11,17 @@ public class LeapYear {
         int year = s.nextInt();
 
         if (year % 4 == 0) {
-            if (year% 100 ==0) {
-                if (year %400 ==0) {
-                   System.out.println(year+ " is Leap Year");  
+            if (year % 100 == 0) {
+                if (year % 400 == 0) {
+                    System.out.println(year + " is Leap Year");
+                } else {
+                    System.err.println(year + " is not Leap Year");
                 }
-                else{
-                     System.err.println(year+ " is not Leap Year");
-                }
-            }
-            else{
-                System.out.println(year+ " is Leap Year");
+            } else {
+                System.out.println(year + " is Leap Year");
             }
         } else {
-            System.err.println(year+ " is not Leap Year");
+            System.err.println(year + " is not Leap Year");
         }
     }
 
