@@ -7,10 +7,7 @@ public class VowelOrConsonant {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        
-        
-        
-        
+
 //      1st Attempt
 //        System.out.println("Enter a Latter ");
 //        String uInp = sc.next();
@@ -26,8 +23,20 @@ public class VowelOrConsonant {
 //        else{
 //         System.err.println(uInp+" is not a Latter");
 //        }
+        System.out.println("Enter a Latter ");
+        String uInp = sc.next();
 
-       
+        if (uInp.equalsIgnoreCase("a")
+                || uInp.equalsIgnoreCase("e")
+                || uInp.equalsIgnoreCase("i")
+                || uInp.equalsIgnoreCase("o")
+                || uInp.equalsIgnoreCase("u")) {
+            
+            System.out.println(uInp + " is Vowel");
+        } 
+        else {
+            System.err.println(uInp + " is Consonant");
+        }
 
     }
 
