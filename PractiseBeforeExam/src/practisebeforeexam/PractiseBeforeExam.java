@@ -7,7 +7,7 @@ public class PractiseBeforeExam {
 
     public static Scanner s = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) {    //Fibonacci 1
 
         System.out.println("Enter a Positive Number for Fibonacci...");
         int inp = s.nextInt();
@@ -26,12 +26,12 @@ public class PractiseBeforeExam {
             n2 = sum;
 
         }
-        System.out.println("\n enter a Positive Number for Check whether it is prime or not ?...");
+        System.out.println("\n Enter a Positive Number for Check whether it is prime or not ?...");
         int num = s.nextInt();
         isPrime(num);
     }
 
-    public static void isPrime(int num) {
+    public static void isPrime(int num) {   //Prime Number  2
 
         int count = 0;
 
@@ -52,12 +52,12 @@ public class PractiseBeforeExam {
         minAndMax(l);
     }
 
-    public static void minAndMax(int size) {
+    public static void minAndMax(int size) {    //Max Min   3
 
         int[] numbers = new int[size];
 
         for (int index = 0; index < numbers.length; index++) {
-            System.out.println("Enter " + (index + 1)+numSeq(index) + " Number.");
+            System.out.println("Enter " + (index + 1) + numSeq(index) + " Number.");
             int inp = s.nextInt();
             numbers[index] = inp;
         }
@@ -83,7 +83,7 @@ public class PractiseBeforeExam {
         discountCalculate(price);
     }
 
-    public static void discountCalculate(double price) {
+    public static void discountCalculate(double price) {    //Discount  4
 
         float discountPercentage = 0.05f;
         double discount = price * discountPercentage;
@@ -92,7 +92,7 @@ public class PractiseBeforeExam {
         if (price > 200) {
             System.out.println("Discount is: " + discount + " and \n Actual Price is: " + actualPrice);
         } else {
-            System.out.println("Discount is: " + discount + " and \n Actual Price is: " + actualPrice);
+            System.out.println("Discount is: 0.0 and \n Actual Price is: " + price);
         }
 
         System.out.println("\n Enter Your Target, how Many Numbers You want to Input...");
@@ -101,33 +101,51 @@ public class PractiseBeforeExam {
         bblSort(bb);
     }
 
-    public static void bblSort(int size) {
-        
+    public static void bblSort(int size) {  //Bubble Sort   5
+
         int[] myArr = new int[size];
-        
+
         for (int index = 0; index < myArr.length; index++) {
-            System.out.println("Enter "+(index+1)+numSeq(index)+ " Number");
+            System.out.println("Enter " + (index + 1) + numSeq(index) + " Number");
             int inp = s.nextInt();
             myArr[index] = inp;
         }
-        System.out.println("Before Bubble Sort: "+Arrays.toString(myArr));
-        
-        for (int i = 0; i < myArr.length-1; i++) {
-            for (int j = 0; j < myArr.length-1-i; j++) {
-                if (myArr[j] > myArr[j+1]) {
-                    int temp = myArr[j+1];
-                    myArr[j+1] = myArr[j];
+        System.out.println("Before Bubble Sort: " + Arrays.toString(myArr));
+
+        for (int i = 0; i < myArr.length - 1; i++) {
+            for (int j = 0; j < myArr.length - 1 - i; j++) {
+                if (myArr[j] > myArr[j + 1]) {
+                    int temp = myArr[j + 1];
+                    myArr[j + 1] = myArr[j];
                     myArr[j] = temp;
                 }
             }
         }
-        System.out.println("After Bubble Sort: "+Arrays.toString(myArr));
+        System.out.println("After Bubble Sort: " + Arrays.toString(myArr));
+
+        System.out.println("Enter a Number to Calculate Factorial...");
+        int inp = s.nextInt();
+        factorial(inp);
+    }
+
+    public static void factorial(int num) { //Factorial 6
+        
+        int count = 1;
+        long result = 1;
+
+        for (int i = 1; i <= num; i++) {
+            result *= count;
+            count++;
+
+        }
+        System.out.println("Factorial of "+num+" is "+result);
 
     }
-    public static String numSeq(int num){
+
+    public static String numSeq(int num) {  //Method Number Sequence    9
         String val = "";
-        
-        switch (num+1) {
+
+        switch (num + 1) {
             case 1:
                 val = "st";
                 break;
@@ -140,7 +158,7 @@ public class PractiseBeforeExam {
             default:
                 val = "th";
         }
-        
+
         return val;
     }
 
