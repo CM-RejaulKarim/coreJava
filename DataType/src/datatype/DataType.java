@@ -7,8 +7,9 @@ public class DataType {
     public static void main(String[] args) {
 
         Scanner s = new Scanner(System.in);
+        int size = s.nextInt();
 
-        for (int i = 1; i <= 1; i++) {
+        for (int i = 1; i <= size; i++) {
 
             try {
                 long x = s.nextLong();
