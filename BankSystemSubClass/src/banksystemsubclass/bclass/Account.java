@@ -2,50 +2,59 @@ package banksystemsubclass.bclass;
 
 public class Account {
 
-    private int accountNumber;
-    private int balance;
+    private String accountNumber;
+    private double balance;
 
     public Account() {
     }
 
-    public Account(int accountNumber, int balance) {
+    public Account(String accountNumber, double balance) {
         this.accountNumber = accountNumber;
         this.balance = balance;
     }
 
-    public int getAccountNumber() {
+    public String getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(int accountNumber) {
+    public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
 
-    public int getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
-    @Override
-    public String toString() {
-        return "Account{" + "accountNumber=" + accountNumber + ", balance=" + balance + '}';
+    
+
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println(amount + "Deposit Successfully.");
+        }
+        else{
+            System.out.println("Invalid Deposit");
+        }
     }
-    
-    public void deposit(){
-    System.out.println("Account No: "+ accountNumber +"Previous Balance : "+ balance);
+
+    public void withdraw(double amount) {
+        if (amount > 0 && balance >= amount) {
+            balance -= amount;
+            System.out.println("Withdrawn Successful.");
+        }
+        else{
+            System.out.println("invalid Withdrawn Request.");
+        }
     }
-    
-    public void withdraw(){
-    System.out.println("Account No: "+ accountNumber +"Previous Balance : "+ balance);
+
+    public void accountDetails() {
+
+        System.out.println("Account No: " + accountNumber );
+        System.out.println("Balance : " + balance);
     }
-    
-    public void accountDetails(){
-        
-        System.out.println("Account No: "+ accountNumber +"Balance : "+ balance);
-    }
-    
-    
+
 }
