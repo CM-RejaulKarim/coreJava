@@ -1,10 +1,9 @@
-
 package banksystemsubclass.bclass;
 
-public class SavingsAccount extends Account{
+public class SavingsAccount extends Account {
 
     private double interestRate;
-    
+
     public SavingsAccount() {
     }
 
@@ -12,7 +11,7 @@ public class SavingsAccount extends Account{
         this.interestRate = interestRate;
     }
 
-    public SavingsAccount(double interestRate, int accountNumber, int balance) {
+    public SavingsAccount(double interestRate, String accountNumber, double balance) {
         super(accountNumber, balance);
         this.interestRate = interestRate;
     }
@@ -26,11 +25,9 @@ public class SavingsAccount extends Account{
     }
 
     @Override
-    public void deposit() {
-        super.deposit();
-        System.out.println("New Balance is: "+(getBalance()+getBalance()*interestRate));
+    public void accountDetails() {
+        super.accountDetails();
+        System.out.println("Interest rate" + interestRate + "%");
     }
-    
-    
-    
+
 }
