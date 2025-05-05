@@ -16,9 +16,6 @@ public class SavingsAccount extends Account {
         this.interestRate = interestRate;
     }
 
-    
-    
-
     public double getInterestRate() {
         return interestRate;
     }
@@ -29,11 +26,8 @@ public class SavingsAccount extends Account {
 
     @Override
     public void accountDetails() {
-        super.accountDetails(); 
-        System.out.println("Interest rate"+ interestRate+"%");
+        super.accountDetails();
+        System.out.println("Interest rate" + interestRate + "%");
     }
 
-    
-
-    
 }

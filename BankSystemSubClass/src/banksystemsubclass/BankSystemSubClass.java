@@ -7,23 +7,22 @@ public class BankSystemSubClass {
 
     public static void main(String[] args) {
 
-        SavingsAccount savings = new SavingsAccount();
-        
-        savings.setAccountNumber("2760");
-        savings.setBalance(5000);
-        savings.setInterestRate(15);
-        
-        savings.deposit(6500);
-        
-        System.out.println("\n");
+        SavingsAccount savings = new SavingsAccount(.05, "2760", 5000);
+
+        System.out.println("Saving Account Details");
         savings.accountDetails();
-        System.out.println("\n");
+        savings.deposit(5000);
+        savings.withdraw(2000);
+        savings.accountDetails();
         
-        CurrentAccount current = new CurrentAccount(500, "2760", 5500);
-        
-        
+        System.out.println("==========================================");
+        System.out.println("\n"
+                + "Current Account Details...");
+        CurrentAccount current = new CurrentAccount(500, "2760", 5000);
+
+        current.accountDetails();
+        current.deposit(500);
         current.withdraw(6000);
-        
         current.accountDetails();
     }
 

@@ -28,11 +28,12 @@ public class CurrentAccount extends Account {
     public void withdraw(double amount) {
         double balance = getBalance();
         if (amount > 0 && balance + overdraftLimit >= amount) {
-            
-            System.out.println("Withdrawn Successful.");
+            balance -= amount;
+            setBalance(balance);
+            System.out.println(amount +" Withdrawn Successful.");
         }
         else{
-            System.out.println("invalid Withdrawn Request.");
+            System.out.println("You have reached overdraftLimit.");
         }
     }
 
