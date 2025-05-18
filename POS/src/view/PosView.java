@@ -1,8 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package view;
+
+import dao.CustomerDao;
+import javax.swing.JOptionPane;
+import javax.swing.JRootPane;
+import util.DatabaseUtil;
 
 /**
  *
@@ -57,7 +59,7 @@ public class PosView extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable = new javax.swing.JTable();
         Supplier = new javax.swing.JPanel();
         Category = new javax.swing.JPanel();
         Purchase = new javax.swing.JPanel();
@@ -211,7 +213,7 @@ public class PosView extends javax.swing.JFrame {
 
         tabMain.addTab("Main", Main);
 
-        jPanel3.setBackground(new java.awt.Color(153, 0, 153));
+        jPanel3.setBackground(new java.awt.Color(255, 204, 204));
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -244,14 +246,34 @@ public class PosView extends javax.swing.JFrame {
         jLabel8.setText("Address");
 
         btnCustomerSave.setText("Save");
+        btnCustomerSave.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCustomerSaveMouseClicked(evt);
+            }
+        });
 
         btnCustomerReset.setText("Reset");
+        btnCustomerReset.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCustomerResetMouseClicked(evt);
+            }
+        });
 
         btnCustomerEdit.setText("Edit");
+        btnCustomerEdit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCustomerEditMouseClicked(evt);
+            }
+        });
 
         btnCustomerDelete.setText("Delete");
+        btnCustomerDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCustomerDeleteMouseClicked(evt);
+            }
+        });
 
-        jPanel4.setBackground(new java.awt.Color(153, 0, 153));
+        jPanel4.setBackground(new java.awt.Color(255, 204, 204));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -266,24 +288,39 @@ public class PosView extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addComponent(jLabel9)
+                .addGap(20, 20, 20))
         );
 
-        jTable1.setBackground(new java.awt.Color(153, 255, 204));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable.setBackground(new java.awt.Color(153, 255, 204));
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Name", "Cell", "Email", "Address"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable);
 
         javax.swing.GroupLayout CustomerLayout = new javax.swing.GroupLayout(Customer);
         Customer.setLayout(CustomerLayout);
@@ -327,9 +364,9 @@ public class PosView extends javax.swing.JFrame {
                                 .addGap(137, 137, 137)
                                 .addComponent(btnCustomerDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(CustomerLayout.createSequentialGroup()
-                        .addGap(112, 112, 112)
+                        .addGap(52, 52, 52)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 870, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
         CustomerLayout.setVerticalGroup(
             CustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -462,6 +499,17 @@ public class PosView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    DatabaseUtil dbU = new DatabaseUtil();
+    CustomerDao customerDao; 
+    
+    
+    public void clear(){
+        CustomerName.setText("");
+        CustomerCell.setText("");
+        CustomerEmail.setText("");
+        CustomerAddress.setText("");
+    }
+    
     private void btnHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseClicked
         // TODO add your handling code here:
         tabMain.setSelectedIndex(0);
@@ -501,6 +549,32 @@ public class PosView extends javax.swing.JFrame {
         // TODO add your handling code here:
         tabMain.setSelectedIndex(7);
     }//GEN-LAST:event_btnReportMouseClicked
+
+    private void btnCustomerResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCustomerResetMouseClicked
+        // TODO add your handling code here:
+        clear();
+    }//GEN-LAST:event_btnCustomerResetMouseClicked
+
+    private void btnCustomerSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCustomerSaveMouseClicked
+        // TODO add your handling code here:
+        
+        String name =CustomerName.getText().trim();
+        String cell =CustomerCell.getText().trim();
+        String email =CustomerEmail.getText().trim();
+        String address =CustomerAddress.getText().trim();
+        
+        customerDao.saveCustomer(name, email, cell, address, jTable);
+        
+        JOptionPane.showMessageDialog(this,"Customer Added Successfully");
+    }//GEN-LAST:event_btnCustomerSaveMouseClicked
+
+    private void btnCustomerEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCustomerEditMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCustomerEditMouseClicked
+
+    private void btnCustomerDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCustomerDeleteMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCustomerDeleteMouseClicked
 
     /**
      * @param args the command line arguments
@@ -576,7 +650,7 @@ public class PosView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable;
     private javax.swing.JTabbedPane tabMain;
     // End of variables declaration//GEN-END:variables
 }
