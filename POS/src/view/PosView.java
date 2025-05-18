@@ -1,4 +1,3 @@
-
 package view;
 
 import dao.CustomerDao;
@@ -12,11 +11,12 @@ import util.DatabaseUtil;
  */
 public class PosView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form PosView
-     */
+    DatabaseUtil util = new DatabaseUtil();
+    CustomerDao customerDao = new CustomerDao();
+
     public PosView() {
         initComponents();
+        customerDao.showAllCustomer(CustomerTable);
     }
 
     /**
@@ -45,13 +45,13 @@ public class PosView extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        CustomerName = new javax.swing.JTextField();
+        txtCustomerName = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        CustomerCell = new javax.swing.JTextField();
+        txtCustomerCell = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        CustomerEmail = new javax.swing.JTextField();
+        txtCustomerEmail = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        CustomerAddress = new javax.swing.JTextField();
+        txtCustomerAddress = new javax.swing.JTextField();
         btnCustomerSave = new javax.swing.JButton();
         btnCustomerReset = new javax.swing.JButton();
         btnCustomerEdit = new javax.swing.JButton();
@@ -59,7 +59,11 @@ public class PosView extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable = new javax.swing.JTable();
+        CustomerTable = new javax.swing.JTable();
+        jLabel10 = new javax.swing.JLabel();
+        txtCustomerId = new javax.swing.JTextField();
+        btnCustomerSearchById = new javax.swing.JButton();
+        btnCustomerSearchByAddress = new javax.swing.JButton();
         Supplier = new javax.swing.JPanel();
         Category = new javax.swing.JPanel();
         Purchase = new javax.swing.JPanel();
@@ -76,11 +80,17 @@ public class PosView extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(1280, 680));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(153, 255, 153));
+        jPanel1.setBackground(new java.awt.Color(0, 102, 0));
 
+        jLabel1.setBackground(new java.awt.Color(0, 204, 51));
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("PointOfSell");
+        jLabel1.setText("Point Of Sell (POS)");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel1MouseEntered(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -98,7 +108,7 @@ public class PosView extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
 
-        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel2.setBackground(new java.awt.Color(102, 0, 102));
 
         btnHome.setBackground(new java.awt.Color(166, 167, 136));
         btnHome.setText("Home");
@@ -208,30 +218,20 @@ public class PosView extends javax.swing.JFrame {
         );
         MainLayout.setVerticalGroup(
             MainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 579, Short.MAX_VALUE)
+            .addGap(0, 793, Short.MAX_VALUE)
         );
 
         tabMain.addTab("Main", Main);
 
-        jPanel3.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel3.setBackground(new java.awt.Color(102, 107, 107));
+        jPanel3.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel4.setBackground(new java.awt.Color(102, 255, 102));
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Add Customers");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
-        );
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 14, 1130, 40));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("Customer Name");
@@ -273,7 +273,7 @@ public class PosView extends javax.swing.JFrame {
             }
         });
 
-        jPanel4.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel4.setBackground(new java.awt.Color(153, 171, 181));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -293,8 +293,8 @@ public class PosView extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
-        jTable.setBackground(new java.awt.Color(153, 255, 204));
-        jTable.setModel(new javax.swing.table.DefaultTableModel(
+        CustomerTable.setBackground(new java.awt.Color(188, 237, 213));
+        CustomerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -320,76 +320,107 @@ public class PosView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable);
+        jScrollPane1.setViewportView(CustomerTable);
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel10.setText("ID");
+
+        btnCustomerSearchById.setText("Search by ID");
+        btnCustomerSearchById.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCustomerSearchByIdMouseClicked(evt);
+            }
+        });
+
+        btnCustomerSearchByAddress.setText("Search by Address");
+        btnCustomerSearchByAddress.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCustomerSearchByAddressMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout CustomerLayout = new javax.swing.GroupLayout(Customer);
         Customer.setLayout(CustomerLayout);
         CustomerLayout.setHorizontalGroup(
             CustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(CustomerLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(CustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerLayout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(32, 32, 32)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(CustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CustomerLayout.createSequentialGroup()
-                        .addGap(37, 37, 37)
+                        .addComponent(btnCustomerSave, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(78, 78, 78)
+                        .addComponent(btnCustomerEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(CustomerLayout.createSequentialGroup()
                         .addGroup(CustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(CustomerLayout.createSequentialGroup()
-                                .addComponent(btnCustomerSave, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
-                                .addComponent(btnCustomerReset, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtCustomerEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(63, 63, 63))
                             .addGroup(CustomerLayout.createSequentialGroup()
-                                .addGroup(CustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(CustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(CustomerName)
-                                    .addComponent(CustomerEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))))
-                        .addGroup(CustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(CustomerLayout.createSequentialGroup()
-                                .addGap(93, 93, 93)
-                                .addGroup(CustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerLayout.createSequentialGroup()
-                                .addGap(127, 127, 127)
-                                .addComponent(btnCustomerEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(CustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(CustomerLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(CustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(CustomerAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(CustomerCell, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(CustomerLayout.createSequentialGroup()
-                                .addGap(137, 137, 137)
-                                .addComponent(btnCustomerDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtCustomerId, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCustomerSearchById, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)))
+                        .addGroup(CustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(CustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CustomerLayout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 870, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(159, Short.MAX_VALUE))
+                        .addGroup(CustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(CustomerLayout.createSequentialGroup()
+                                .addComponent(txtCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(44, 44, 44)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCustomerCell, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtCustomerAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(CustomerLayout.createSequentialGroup()
+                        .addComponent(btnCustomerDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(98, 98, 98)
+                        .addComponent(btnCustomerReset, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCustomerSearchByAddress)
+                        .addGap(87, 87, 87))))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(CustomerLayout.createSequentialGroup()
+                .addGap(87, 87, 87)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 870, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         CustomerLayout.setVerticalGroup(
             CustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CustomerLayout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(CustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(txtCustomerName, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(CustomerCell, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCustomerCell, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtCustomerId, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(btnCustomerSearchById, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(CustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CustomerEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCustomerEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CustomerAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCustomerAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(CustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCustomerSave, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCustomerReset, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCustomerEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCustomerDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCustomerDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCustomerSearchByAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -407,7 +438,7 @@ public class PosView extends javax.swing.JFrame {
         );
         SupplierLayout.setVerticalGroup(
             SupplierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 579, Short.MAX_VALUE)
+            .addGap(0, 793, Short.MAX_VALUE)
         );
 
         tabMain.addTab("Supplier", Supplier);
@@ -420,7 +451,7 @@ public class PosView extends javax.swing.JFrame {
         );
         CategoryLayout.setVerticalGroup(
             CategoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 579, Short.MAX_VALUE)
+            .addGap(0, 793, Short.MAX_VALUE)
         );
 
         tabMain.addTab("Category", Category);
@@ -433,7 +464,7 @@ public class PosView extends javax.swing.JFrame {
         );
         PurchaseLayout.setVerticalGroup(
             PurchaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 579, Short.MAX_VALUE)
+            .addGap(0, 793, Short.MAX_VALUE)
         );
 
         tabMain.addTab("Purchase", Purchase);
@@ -446,7 +477,7 @@ public class PosView extends javax.swing.JFrame {
         );
         SaleLayout.setVerticalGroup(
             SaleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 579, Short.MAX_VALUE)
+            .addGap(0, 793, Short.MAX_VALUE)
         );
 
         tabMain.addTab("Sale", Sale);
@@ -467,7 +498,7 @@ public class PosView extends javax.swing.JFrame {
             .addGroup(StockLayout.createSequentialGroup()
                 .addGap(219, 219, 219)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addContainerGap(460, Short.MAX_VALUE))
         );
 
         tabMain.addTab("Stock", Stock);
@@ -488,7 +519,7 @@ public class PosView extends javax.swing.JFrame {
             .addGroup(ReportLayout.createSequentialGroup()
                 .addGap(232, 232, 232)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(291, Short.MAX_VALUE))
+                .addContainerGap(505, Short.MAX_VALUE))
         );
 
         tabMain.addTab("Report", Report);
@@ -499,17 +530,13 @@ public class PosView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    DatabaseUtil dbU = new DatabaseUtil();
-    CustomerDao customerDao; 
-    
-    
-    public void clear(){
-        CustomerName.setText("");
-        CustomerCell.setText("");
-        CustomerEmail.setText("");
-        CustomerAddress.setText("");
+    public void resetCustomerForm() {
+        txtCustomerName.setText("");
+        txtCustomerCell.setText("");
+        txtCustomerEmail.setText("");
+        txtCustomerAddress.setText("");
     }
-    
+
     private void btnHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseClicked
         // TODO add your handling code here:
         tabMain.setSelectedIndex(0);
@@ -552,29 +579,64 @@ public class PosView extends javax.swing.JFrame {
 
     private void btnCustomerResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCustomerResetMouseClicked
         // TODO add your handling code here:
-        clear();
+        resetCustomerForm();
     }//GEN-LAST:event_btnCustomerResetMouseClicked
 
     private void btnCustomerSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCustomerSaveMouseClicked
         // TODO add your handling code here:
-        
-        String name =CustomerName.getText().trim();
-        String cell =CustomerCell.getText().trim();
-        String email =CustomerEmail.getText().trim();
-        String address =CustomerAddress.getText().trim();
-        
-        customerDao.saveCustomer(name, email, cell, address, jTable);
-        
-        JOptionPane.showMessageDialog(this,"Customer Added Successfully");
+
+        String name = txtCustomerName.getText().trim();
+        String cell = txtCustomerCell.getText().trim();
+        String email = txtCustomerEmail.getText().trim();
+        String address = txtCustomerAddress.getText().trim();
+
+        customerDao.saveCustomer(name, email, cell, address, CustomerTable);
+
+        //JOptionPane.showMessageDialog(this,"New Customer Added Successfully");
+        resetCustomerForm();
     }//GEN-LAST:event_btnCustomerSaveMouseClicked
 
     private void btnCustomerEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCustomerEditMouseClicked
         // TODO add your handling code here:
+        btnCustomerSave.setVisible(false);
+        
+        int rowindex = CustomerTable.getSelectedRow();
+        String id = CustomerTable.getModel().getValueAt(rowindex, 0).toString();
+        String name = CustomerTable.getModel().getValueAt(rowindex, 1).toString();
+        String email = CustomerTable.getModel().getValueAt(rowindex, 2).toString();
+        String cell = CustomerTable.getModel().getValueAt(rowindex, 3).toString();
+        String address = CustomerTable.getModel().getValueAt(rowindex, 4).toString();
+
+        txtCustomerId.setText(id);
+        txtCustomerName.setText(name);
+        txtCustomerEmail.setText(email);
+        txtCustomerCell.setText(cell);
+        txtCustomerAddress.setText(address);
+
+
     }//GEN-LAST:event_btnCustomerEditMouseClicked
 
     private void btnCustomerDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCustomerDeleteMouseClicked
         // TODO add your handling code here:
+        int id = Integer.parseInt(txtCustomerId.getText());
+        customerDao.deletecustomer(id, CustomerTable);
+
+        resetCustomerForm();
     }//GEN-LAST:event_btnCustomerDeleteMouseClicked
+
+    private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
+        // TODO add your handling code here: 
+        //POS Navbar mouse event
+        
+    }//GEN-LAST:event_jLabel1MouseEntered
+
+    private void btnCustomerSearchByIdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCustomerSearchByIdMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCustomerSearchByIdMouseClicked
+
+    private void btnCustomerSearchByAddressMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCustomerSearchByAddressMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCustomerSearchByAddressMouseClicked
 
     /**
      * @param args the command line arguments
@@ -614,10 +676,7 @@ public class PosView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Category;
     private javax.swing.JPanel Customer;
-    private javax.swing.JTextField CustomerAddress;
-    private javax.swing.JTextField CustomerCell;
-    private javax.swing.JTextField CustomerEmail;
-    private javax.swing.JTextField CustomerName;
+    private javax.swing.JTable CustomerTable;
     private javax.swing.JPanel Main;
     private javax.swing.JPanel Purchase;
     private javax.swing.JPanel Report;
@@ -630,6 +689,8 @@ public class PosView extends javax.swing.JFrame {
     private javax.swing.JButton btnCustomerEdit;
     private javax.swing.JButton btnCustomerReset;
     private javax.swing.JButton btnCustomerSave;
+    private javax.swing.JButton btnCustomerSearchByAddress;
+    private javax.swing.JButton btnCustomerSearchById;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnPurchase;
     private javax.swing.JButton btnReport;
@@ -637,6 +698,7 @@ public class PosView extends javax.swing.JFrame {
     private javax.swing.JButton btnStock;
     private javax.swing.JButton btnSupplier;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -650,7 +712,11 @@ public class PosView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable;
     private javax.swing.JTabbedPane tabMain;
+    private javax.swing.JTextField txtCustomerAddress;
+    private javax.swing.JTextField txtCustomerCell;
+    private javax.swing.JTextField txtCustomerEmail;
+    private javax.swing.JTextField txtCustomerId;
+    private javax.swing.JTextField txtCustomerName;
     // End of variables declaration//GEN-END:variables
 }
