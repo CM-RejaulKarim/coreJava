@@ -264,7 +264,6 @@
                               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="btnCustomerSave" min="-2" pref="101" max="-2" attributes="0"/>
@@ -310,8 +309,10 @@
                               <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
                               <Component id="btnCustomerReset" min="-2" pref="101" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btnCustomerSearch" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                               <Component id="btnCustomerSearchByAddress" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -351,6 +352,7 @@
                           <Component id="btnCustomerEdit" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                           <Component id="btnCustomerDelete" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                           <Component id="btnCustomerSearchByAddress" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                          <Component id="btnCustomerSearch" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
@@ -556,6 +558,9 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="CustomerTableMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -568,6 +573,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtCustomerId">
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtCustomerIdMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnCustomerSearchById">
               <Properties>
@@ -583,6 +591,14 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCustomerSearchByAddressMouseClicked"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnCustomerSearch">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Search"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCustomerSearchMouseClicked"/>
               </Events>
             </Component>
           </SubComponents>
