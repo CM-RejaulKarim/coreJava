@@ -5,10 +5,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 import util.DatabaseUtil;
 
-/**
- *
- * @author user
- */
 public class PosView extends javax.swing.JFrame {
 
     DatabaseUtil util = new DatabaseUtil();
