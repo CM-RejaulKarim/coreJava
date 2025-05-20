@@ -17,6 +17,16 @@ public class LearnDatabaseView extends javax.swing.JFrame {
         initComponents();
     }
 
+    public void studentFormReset() {
+        
+        txtStudentId.setText("");
+        txtStudentName.setText("");
+        txtStudentCell.setText("");
+        txtStudentEmail.setText("");
+        txtStudentAddress.setText("");
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,6 +36,8 @@ public class LearnDatabaseView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -44,21 +56,38 @@ public class LearnDatabaseView extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtStudentName = new javax.swing.JTextField();
+        txtStudentEmail = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        txtStudentName1 = new javax.swing.JTextField();
+        txtStudentName = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtStudentCell = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        txtStudentName2 = new javax.swing.JTextField();
+        txtStudentAddress = new javax.swing.JTextField();
         btnSaveStudent = new javax.swing.JButton();
         btnStudentEdit = new javax.swing.JButton();
         btnStudentFormReset = new javax.swing.JButton();
         btnStudentDelete = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        txtStudentCell1 = new javax.swing.JTextField();
+        txtStudentId = new javax.swing.JTextField();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         jPanel9 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -196,7 +225,7 @@ public class LearnDatabaseView extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Student Details");
+        jLabel4.setText("Add Student Details");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -207,49 +236,93 @@ public class LearnDatabaseView extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addContainerGap()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 100));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 70));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("Email");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 130, 40, 20));
-        jPanel1.add(txtStudentName, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 130, 140, 20));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 100, 40, 30));
+        jPanel1.add(txtStudentEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 100, 140, 30));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("Student Name");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, 90, 20));
-        jPanel1.add(txtStudentName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 140, 20));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 90, 30));
+        jPanel1.add(txtStudentName, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, 140, 30));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel8.setText("Cell");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 30, 20));
-        jPanel1.add(txtStudentCell, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 130, 140, 20));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 30, 30));
+        jPanel1.add(txtStudentCell, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 100, 140, 30));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setText("Address");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 60, 20));
-        jPanel1.add(txtStudentName2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 390, 20));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 60, 30));
+        jPanel1.add(txtStudentAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 350, 30));
 
         btnSaveStudent.setText("Save");
-        jPanel1.add(btnSaveStudent, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 180, -1, -1));
+        jPanel1.add(btnSaveStudent, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 170, -1, 30));
 
         btnStudentEdit.setText("Edit");
-        jPanel1.add(btnStudentEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 180, -1, -1));
+        jPanel1.add(btnStudentEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 170, -1, 30));
 
         btnStudentFormReset.setText("Reset");
-        jPanel1.add(btnStudentFormReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 180, -1, -1));
+        btnStudentFormReset.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnStudentFormResetMouseClicked(evt);
+            }
+        });
+        jPanel1.add(btnStudentFormReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 170, -1, 30));
 
         btnStudentDelete.setText("Delete");
-        jPanel1.add(btnStudentDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 180, -1, -1));
+        jPanel1.add(btnStudentDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 170, -1, 30));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel10.setText("ID");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 20, 20));
-        jPanel1.add(txtStudentCell1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 80, 20));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 20, 30));
+        jPanel1.add(txtStudentId, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 90, 30));
+
+        jPanel10.setBackground(new java.awt.Color(51, 255, 51));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("Student's Details");
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(458, 458, 458)
+                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 920, 70));
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 870, 180));
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -322,6 +395,12 @@ public class LearnDatabaseView extends javax.swing.JFrame {
         tabMain.setSelectedIndex(3);
     }//GEN-LAST:event_btnReportMouseClicked
 
+    private void btnStudentFormResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStudentFormResetMouseClicked
+        // TODO add your handling code here:
+        studentFormReset();
+        
+    }//GEN-LAST:event_btnStudentFormResetMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -368,6 +447,7 @@ public class LearnDatabaseView extends javax.swing.JFrame {
     private javax.swing.JButton btnTeachers;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -377,6 +457,7 @@ public class LearnDatabaseView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -385,11 +466,15 @@ public class LearnDatabaseView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTabbedPane tabMain;
+    private javax.swing.JTextField txtStudentAddress;
     private javax.swing.JTextField txtStudentCell;
-    private javax.swing.JTextField txtStudentCell1;
+    private javax.swing.JTextField txtStudentEmail;
+    private javax.swing.JTextField txtStudentId;
     private javax.swing.JTextField txtStudentName;
-    private javax.swing.JTextField txtStudentName1;
-    private javax.swing.JTextField txtStudentName2;
     // End of variables declaration//GEN-END:variables
 }
