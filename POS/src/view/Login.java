@@ -123,8 +123,8 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         String userName = txtUserName.getText().toString().trim();
         String userPass = txtUserPass.getText().toString().trim();
-        
-        if (userName.equalsIgnoreCase("admin") && userPass.equalsIgnoreCase("admin")) {
+        ///User & Password == admin
+        if (userName.equalsIgnoreCase("1234") && userPass.equalsIgnoreCase("1234")) {
             
             PosView pv= new PosView();
             dispose();
