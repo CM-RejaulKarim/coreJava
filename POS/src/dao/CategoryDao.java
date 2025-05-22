@@ -15,17 +15,13 @@ public class CategoryDao {
     DatabaseUtil util = new DatabaseUtil();
     PreparedStatement ps;
 
-    public void saveCategory(String name, String email, String cell, String address, String contactPerson, JTable jt) {
-        String sql = "insert into suppliers(name, address, cell, email, contactPerson) values(?,?,?,?,?)";
+    public void saveCategory(String name, JTable jt) {
+        String sql = "insert into category(name) values(?)";
 
         try {
             ps = util.getCon().prepareStatement(sql);
 
             ps.setString(1, name);
-            ps.setString(2, address);
-            ps.setString(3, cell);
-            ps.setString(4, email);
-            ps.setString(5, contactPerson);
 
             ps.executeUpdate();
 
@@ -43,11 +39,11 @@ public class CategoryDao {
 
     public void showAllCategory(JTable jt) {
 
-        String[] columnsName = {"ID", "Name", "Address", "Cell", "Email", "contactPerson"};
+        String[] columnsName = {"ID", "Name"};
         DefaultTableModel tableModel = new DefaultTableModel(columnsName, 0);
         jt.setModel(tableModel);
 
-        String sql = "select * from suppliers";
+        String sql = "select * from category";
 
         try {
             ps = util.getCon().prepareStatement(sql);
@@ -57,12 +53,8 @@ public class CategoryDao {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
-                String email = rs.getString("email");
-                String cell = rs.getString("cell");
-                String address = rs.getString("address");
-                String contactPerson = rs.getString("contactPerson");
 
-                Object[] rowData = {id, name, address, cell, email, contactPerson};
+                Object[] rowData = {id, name};
                 tableModel.addRow(rowData);
 
             }
@@ -77,7 +69,7 @@ public class CategoryDao {
 
     public void deleteCategory(int id, JTable jt) {
 
-        String sql = "Delete from suppliers where id = ?";
+        String sql = "Delete from category where id = ?";
 
         try {
             ps = util.getCon().prepareStatement(sql);
@@ -97,25 +89,22 @@ public class CategoryDao {
         }
     }
 
-    public void editCategory(int id, String name, String email, String cell, String address, String contactPerson, JTable jt) {
-        String sql = "update suppliers set name=?, address=?, cell=?, email=?, contactPerson =? where id =?";
+    public void editCategory(int id, String name, JTable jt) {
+        String sql = "update category set name=?";
 
         try {
             ps = util.getCon().prepareStatement(sql);
 
             ps.setString(1, name);
-            ps.setString(2, address);
-            ps.setString(3, cell);
-            ps.setString(4, email);
-            ps.setString(5, contactPerson);
-            ps.setInt(6, id);
+
+            ps.setInt(2, id);
 
             ps.executeUpdate();
 
             ps.close();
             util.getCon().close();
 
-            JOptionPane.showMessageDialog(null, "New supplier Details Edited Successfully");
+            JOptionPane.showMessageDialog(null, "New category Details Edited Successfully");
             showAllCategory(jt);
 
         } catch (SQLException ex) {

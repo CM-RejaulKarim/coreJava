@@ -37,7 +37,6 @@ public class Login extends javax.swing.JFrame {
         setBackground(new java.awt.Color(32, 188, 27));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setName("loginFrame"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(366, 444));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(19, 125, 25));
@@ -53,10 +52,20 @@ public class Login extends javax.swing.JFrame {
         txtUserName.setBackground(new java.awt.Color(0, 204, 0));
         txtUserName.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         txtUserName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtUserName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUserNameKeyPressed(evt);
+            }
+        });
 
         txtUserPass.setBackground(new java.awt.Color(0, 204, 0));
         txtUserPass.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         txtUserPass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtUserPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUserPassKeyPressed(evt);
+            }
+        });
 
         btnLogin.setBackground(new java.awt.Color(51, 204, 0));
         btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -64,6 +73,11 @@ public class Login extends javax.swing.JFrame {
         btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnLoginMouseClicked(evt);
+            }
+        });
+        btnLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnLoginKeyPressed(evt);
             }
         });
 
@@ -125,12 +139,40 @@ public class Login extends javax.swing.JFrame {
         String userPass = txtUserPass.getText().toString().trim();
         ///User & Password == admin
         if (userName.equalsIgnoreCase("1234") && userPass.equalsIgnoreCase("1234")) {
-            
-            PosView pv= new PosView();
+
+            PosView pv = new PosView();
             dispose();
             pv.setVisible(true);
         }
     }//GEN-LAST:event_btnLoginMouseClicked
+
+    private void txtUserNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserNameKeyPressed
+        // TODO add your handling code here:
+        int key = evt.getKeyCode();
+        if (key == 10) {
+
+            txtUserPass.requestFocus();
+        }
+    }//GEN-LAST:event_txtUserNameKeyPressed
+
+    private void txtUserPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserPassKeyPressed
+        // TODO add your handling code here:
+        int key = evt.getKeyCode();
+        if (key == 10) {
+
+            btnLogin.requestFocus();
+        }
+    }//GEN-LAST:event_txtUserPassKeyPressed
+
+    private void btnLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnLoginKeyPressed
+        // TODO add your handling code here:
+
+        int key = evt.getKeyCode();
+        if (key == 10) {
+
+            requestFocus();
+        }
+    }//GEN-LAST:event_btnLoginKeyPressed
 
     /**
      * @param args the command line arguments
