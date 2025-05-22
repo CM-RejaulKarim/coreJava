@@ -1,18 +1,20 @@
 package view;
 
 import dao.CustomerDao;
+import dao.SupplierDao;
 import javax.swing.JOptionPane;
-import javax.swing.JRootPane;
 import util.DatabaseUtil;
 
 public class PosView extends javax.swing.JFrame {
 
     DatabaseUtil util = new DatabaseUtil();
     CustomerDao customerDao = new CustomerDao();
+    SupplierDao supplierDao = new SupplierDao();
 
     public PosView() {
         initComponents();
         customerDao.showAllCustomer(CustomerTable);
+        supplierDao.showAllSupplier(supplierTable);
 
         searchOptionVisibilityOff();
     }
@@ -90,7 +92,7 @@ public class PosView extends javax.swing.JFrame {
         btnSupplierReset = new javax.swing.JButton();
         btnSupplierSave = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        supplierTable = new javax.swing.JTable();
         Category = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
@@ -537,18 +539,38 @@ public class PosView extends javax.swing.JFrame {
         jPanel6.add(txtSupplierCell, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 120, 30));
 
         btnSupplierEdit.setText("Edit");
+        btnSupplierEdit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSupplierEditMouseClicked(evt);
+            }
+        });
         jPanel6.add(btnSupplierEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, -1, -1));
 
         btnSupplierDelete.setText("Delete");
+        btnSupplierDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSupplierDeleteMouseClicked(evt);
+            }
+        });
         jPanel6.add(btnSupplierDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 260, -1, -1));
 
         btnSupplierReset.setText("Reset");
+        btnSupplierReset.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSupplierResetMouseClicked(evt);
+            }
+        });
         jPanel6.add(btnSupplierReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 260, -1, -1));
 
         btnSupplierSave.setText("Save");
+        btnSupplierSave.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSupplierSaveMouseClicked(evt);
+            }
+        });
         jPanel6.add(btnSupplierSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        supplierTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -559,7 +581,12 @@ public class PosView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        supplierTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                supplierTableMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(supplierTable);
 
         jPanel6.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 1130, 270));
 
@@ -755,6 +782,16 @@ public class PosView extends javax.swing.JFrame {
         btnCustomerSave.setVisible(true);
         searchOptionVisibilityOff();
     }
+    public void resetSupplierForm(){
+    txtSupplierId.setText("");
+    txtSupplierName.setText("");
+    txtSupplierAddress.setText("");
+    txtSupplierCell.setText("");
+    txtSupplierEmail.setText("");
+    txtSupplierContactPerson.setText("");
+    
+    btnSupplierSave.setVisible(true);
+    }
 
     private void btnHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseClicked
         // TODO add your handling code here:
@@ -902,6 +939,75 @@ public class PosView extends javax.swing.JFrame {
         resetCustomerForm();
     }//GEN-LAST:event_txtCustomerIdMouseClicked
 
+    private void btnSupplierSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSupplierSaveMouseClicked
+        // TODO add your handling code here:
+        
+         String name = txtSupplierName.getText().trim();
+        String address = txtSupplierAddress.getText().trim();
+        String cell = txtSupplierCell.getText().trim();
+        String email = txtSupplierEmail.getText().trim();
+        String ContactPerson = txtSupplierContactPerson.getText().trim();
+        
+        
+        supplierDao.saveSupplier(name, email, cell, address, ContactPerson, supplierTable);
+
+        
+        resetSupplierForm();
+    }//GEN-LAST:event_btnSupplierSaveMouseClicked
+
+    private void btnSupplierResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSupplierResetMouseClicked
+        // TODO add your handling code here:
+        resetSupplierForm();
+        btnSupplierSave.setVisible(true);
+    }//GEN-LAST:event_btnSupplierResetMouseClicked
+
+    private void btnSupplierDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSupplierDeleteMouseClicked
+        // TODO add your handling code here:
+        int id = Integer.parseInt(txtSupplierId.getText().trim());
+        supplierDao.deleteSupplier(id, supplierTable);
+        
+        resetSupplierForm();
+        btnSupplierSave.setVisible(true);
+    }//GEN-LAST:event_btnSupplierDeleteMouseClicked
+
+    private void btnSupplierEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSupplierEditMouseClicked
+        // TODO add your handling code here:
+        
+        String name = txtSupplierName.getText().trim();
+        String address = txtSupplierAddress.getText().trim();
+        String cell = txtSupplierCell.getText().trim();
+        String email = txtSupplierEmail.getText().trim();
+        String ContactPerson = txtSupplierContactPerson.getText().trim();
+        int id = Integer.parseInt(txtSupplierId.getText().trim());
+        
+        supplierDao.editSupplier(id, name, email, cell, address, ContactPerson, supplierTable);
+        
+        resetSupplierForm();
+        btnSupplierSave.setVisible(true);
+    }//GEN-LAST:event_btnSupplierEditMouseClicked
+
+    private void supplierTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_supplierTableMouseClicked
+        // TODO add your handling code here:
+        
+        btnSupplierSave.setVisible(false);
+
+        int rowindex = supplierTable.getSelectedRow();
+        
+        String id = supplierTable.getModel().getValueAt(rowindex, 0).toString();
+        String name = supplierTable.getModel().getValueAt(rowindex, 1).toString();
+        String address = supplierTable.getModel().getValueAt(rowindex, 2).toString();
+        String cell = supplierTable.getModel().getValueAt(rowindex, 3).toString();
+        String email = supplierTable.getModel().getValueAt(rowindex, 4).toString();
+        String contactPerson = supplierTable.getModel().getValueAt(rowindex, 5).toString();
+
+        txtSupplierId.setText(id);
+        txtSupplierName.setText(name);
+        txtSupplierEmail.setText(email);
+        txtSupplierCell.setText(cell);
+        txtSupplierAddress.setText(address);
+        txtSupplierContactPerson.setText(contactPerson);
+    }//GEN-LAST:event_supplierTableMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1001,8 +1107,8 @@ public class PosView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTable supplierTable;
     private javax.swing.JTabbedPane tabMain;
     private javax.swing.JTextField txtCategoryId;
     private javax.swing.JTextField txtCategoryName;
