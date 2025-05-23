@@ -128,7 +128,9 @@ public class PosView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(10, 130, 35));
         setFont(new java.awt.Font("Calibri", 0, 10)); // NOI18N
-        setMinimumSize(new java.awt.Dimension(1300, 690));
+        setMinimumSize(new java.awt.Dimension(1280, 670));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1280, 670));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 0));
@@ -759,7 +761,7 @@ public class PosView extends javax.swing.JFrame {
                     .addComponent(btnCategoryEdit)
                     .addComponent(btnCategoryDelete)
                     .addComponent(btnCategoryReset))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)

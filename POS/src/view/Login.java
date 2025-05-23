@@ -4,6 +4,9 @@
  */
 package view;
 
+import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Admin
@@ -15,6 +18,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+
     }
 
     /**
@@ -52,6 +56,7 @@ public class Login extends javax.swing.JFrame {
         txtUserName.setBackground(new java.awt.Color(0, 204, 0));
         txtUserName.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         txtUserName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtUserName.setText("admin");
         txtUserName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtUserNameKeyPressed(evt);
@@ -61,6 +66,7 @@ public class Login extends javax.swing.JFrame {
         txtUserPass.setBackground(new java.awt.Color(0, 204, 0));
         txtUserPass.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         txtUserPass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtUserPass.setText("admin");
         txtUserPass.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtUserPassKeyPressed(evt);
@@ -89,16 +95,16 @@ public class Login extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnLogin)
-                            .addComponent(txtUserPass, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(83, Short.MAX_VALUE))
+                            .addComponent(txtUserPass, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtUserName)))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,24 +139,37 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void loginByPressEnter(java.awt.event.KeyEvent evt) {
+
+        int key = evt.getKeyCode();
+        if (key == KeyEvent.VK_ENTER) {
+            //btnLogin.doClick();
+            btnLogin.doClick();
+        }
+    }
+
+
     private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
         // TODO add your handling code here:
+
         String userName = txtUserName.getText().toString().trim();
         String userPass = txtUserPass.getText().toString().trim();
         ///User & Password == admin
-        if (userName.equalsIgnoreCase("1234") && userPass.equalsIgnoreCase("1234")) {
+        if (userName.equalsIgnoreCase("admin") && userPass.equalsIgnoreCase("admin")) {
 
             PosView pv = new PosView();
             dispose();
             pv.setVisible(true);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Please Enter Correct UserName And Password...");
         }
     }//GEN-LAST:event_btnLoginMouseClicked
 
     private void txtUserNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserNameKeyPressed
         // TODO add your handling code here:
         int key = evt.getKeyCode();
-        if (key == 10) {
-
+        if (key == 10 || key == KeyEvent.VK_DOWN) {
             txtUserPass.requestFocus();
         }
     }//GEN-LAST:event_txtUserNameKeyPressed
@@ -159,19 +178,16 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         int key = evt.getKeyCode();
         if (key == 10) {
-
             btnLogin.requestFocus();
+        }
+        if (key == KeyEvent.VK_UP) {
+            txtUserName.requestFocus();
         }
     }//GEN-LAST:event_txtUserPassKeyPressed
 
     private void btnLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnLoginKeyPressed
         // TODO add your handling code here:
-
-        int key = evt.getKeyCode();
-        if (key == 10) {
-
-            requestFocus();
-        }
+        loginByPressEnter(evt);
     }//GEN-LAST:event_btnLoginKeyPressed
 
     /**
