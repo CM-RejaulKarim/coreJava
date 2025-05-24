@@ -139,29 +139,19 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void loginByPressEnter(java.awt.event.KeyEvent evt) {
-
-        int key = evt.getKeyCode();
-        if (key == KeyEvent.VK_ENTER) {
-            //btnLogin.doClick();
-            btnLogin.doClick();
-        }
-    }
-
 
     private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
         // TODO add your handling code here:
 
-        String userName = txtUserName.getText().toString().trim();
-        String userPass = txtUserPass.getText().toString().trim();
+        String userName = txtUserName.getText().trim();
+        String userPass = txtUserPass.getText().trim();
         ///User & Password == admin
         if (userName.equalsIgnoreCase("admin") && userPass.equalsIgnoreCase("admin")) {
 
             PosView pv = new PosView();
             dispose();
             pv.setVisible(true);
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(this, "Please Enter Correct UserName And Password...");
         }
     }//GEN-LAST:event_btnLoginMouseClicked
@@ -187,7 +177,12 @@ public class Login extends javax.swing.JFrame {
 
     private void btnLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnLoginKeyPressed
         // TODO add your handling code here:
-        loginByPressEnter(evt);
+
+        int key = evt.getKeyCode();
+        if (key == KeyEvent.VK_ENTER) {
+
+            btnLogin.doClick();
+        }
     }//GEN-LAST:event_btnLoginKeyPressed
 
     /**

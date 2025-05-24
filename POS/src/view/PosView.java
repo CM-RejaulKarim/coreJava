@@ -127,9 +127,8 @@ public class PosView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(10, 130, 35));
-        setFont(new java.awt.Font("Calibri", 0, 10)); // NOI18N
-        setMinimumSize(new java.awt.Dimension(1280, 670));
-        setUndecorated(true);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
         setPreferredSize(new java.awt.Dimension(1280, 670));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -137,6 +136,7 @@ public class PosView extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(0, 204, 51));
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(1, 203, 5));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Point Of Sell (POS)");
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
