@@ -18,6 +18,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        getRootPane().setDefaultButton(btnLogin);
 
     }
 
@@ -76,14 +77,9 @@ public class Login extends javax.swing.JFrame {
         btnLogin.setBackground(new java.awt.Color(51, 204, 0));
         btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnLogin.setText("Login");
-        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnLoginMouseClicked(evt);
-            }
-        });
-        btnLogin.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                btnLoginKeyPressed(evt);
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
             }
         });
 
@@ -140,22 +136,6 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
-    private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
-        // TODO add your handling code here:
-
-        String userName = txtUserName.getText().trim();
-        String userPass = txtUserPass.getText().trim();
-        ///User & Password == admin
-        if (userName.equalsIgnoreCase("admin") && userPass.equalsIgnoreCase("admin")) {
-
-            PosView pv = new PosView();
-            dispose();
-            pv.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(this, "Please Enter Correct UserName And Password...");
-        }
-    }//GEN-LAST:event_btnLoginMouseClicked
-
     private void txtUserNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserNameKeyPressed
         // TODO add your handling code here:
         int key = evt.getKeyCode();
@@ -173,17 +153,25 @@ public class Login extends javax.swing.JFrame {
         if (key == KeyEvent.VK_UP) {
             txtUserName.requestFocus();
         }
+
+
     }//GEN-LAST:event_txtUserPassKeyPressed
 
-    private void btnLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnLoginKeyPressed
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
 
-        int key = evt.getKeyCode();
-        if (key == KeyEvent.VK_ENTER) {
+        String userName = txtUserName.getText().trim();
+        String userPass = txtUserPass.getText().trim();
+        ///User & Password == admin
+        if (userName.equalsIgnoreCase("admin") && userPass.equalsIgnoreCase("admin")) {
 
-            btnLogin.doClick();
+            PosView pv = new PosView();
+            dispose();
+            pv.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Please Enter Correct UserName And Password...");
         }
-    }//GEN-LAST:event_btnLoginKeyPressed
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments
