@@ -678,7 +678,7 @@ public class PosView extends javax.swing.JFrame {
             }
         });
 
-        categoryTable.setBackground(new java.awt.Color(121, 118, 118));
+        categoryTable.setBackground(new java.awt.Color(204, 204, 255));
         categoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
