@@ -15,51 +15,51 @@ public class TaskCRUD {
     static String sql;
 
     public static void main(String[] args) {
-        saveStudent("atik", "atik@gmail.com", "m.pur");
+        saveOrganization("atik", "atik@gmail.com", 11);
         System.out.println("-------------------------------------------------");
         
         
         System.out.println("After save");
-        showAllStudent();       
+        showAllOrganization();       
          System.out.println("-------------------------------------------------");
          
-        updateStudent("Atikur Rahman", "atikur@gmail.com", "demra", 1);
+        updateOrganization("Atikur Rahman", "atikur@gmail.com", 10, 1);
         System.out.println("After Update");
-        showAllStudent();
+        showAllOrganization();
          System.out.println("-------------------------------------------------");
         
         
-        deleteStudent(1);
+        deleteOrganization(1);
         System.out.println("After Delete");
-        showAllStudent();
+        showAllOrganization();
          System.out.println("-------------------------------------------------");
         
         
     }
 
-    public static void saveStudent(String name, String email, String address) {
-        sql = "insert into ccsl (name, email, address) values(?,?,?)";
+    public static void saveOrganization(String name, String headQuaters, int memberStates) {
+        sql = "insert into organizations (name, headQuaters, memberStates) values(?,?,?)";
 
         try {
             ps = util.getCon().prepareStatement(sql);
 
             ps.setString(1, name);
-            ps.setString(2, email);
-            ps.setString(3, address);
+            ps.setString(2, headQuaters);
+            ps.setInt(3, memberStates);
 
             ps.executeUpdate();
 
             ps.close();
             util.getCon().close();
-            System.out.println("Student Saved.");
+            System.out.println("Organization Saved.");
 
         } catch (SQLException ex) {
             Logger.getLogger(TaskCRUD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public static void showAllStudent() {
-        sql = "select * from ccsl";
+    public static void showAllOrganization() {
+        sql = "select * from organizations";
 
         try {
             ps = util.getCon().prepareStatement(sql);
@@ -69,10 +69,10 @@ public class TaskCRUD {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
-                String email = rs.getString("email");
-                String address = rs.getString("address");
+                String headQuaters = rs.getString("headQuaters");
+                int memberStates = rs.getInt("memberStates");
 
-                System.out.println("ID:" + id + ", Name:" + name + ", Email:" + email + ", Address:" + address);
+                System.out.println("ID:" + id + ", Name:" + name + ", Email:" + headQuaters + ", Address:" + memberStates);
 
             }
             rs.close();
@@ -85,14 +85,14 @@ public class TaskCRUD {
 
     }
 
-    public static void updateStudent(String name, String email, String address, int id) {
-        sql = "update ccsl set name=?, email=?, address=? where id=?";
+    public static void updateOrganization(String name, String headQuaters, int memberStates, int id) {
+        sql = "update organizations set name=?, headQuaters=?, memberStates=? where id=?";
 
         try {
             ps = util.getCon().prepareStatement(sql);
             ps.setString(1, name);
-            ps.setString(2, email);
-            ps.setString(3, address);
+            ps.setString(2, headQuaters);
+            ps.setInt(3, memberStates);
             ps.setInt(4, id);
 
             ps.executeUpdate();
@@ -105,8 +105,8 @@ public class TaskCRUD {
         }
     }
 
-    public static void deleteStudent(int id) {
-        sql = "delete from ccsl where id=?";
+    public static void deleteOrganization(int id) {
+        sql = "delete from organizations where id=?";
 
         try {
             ps = util.getCon().prepareStatement(sql);

@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 public class TaskDbUtil {
 
     private Connection con = null;
-    private String url = "jdbc:mysql://localhost:3306/education";
+    private String url = "jdbc:mysql://localhost:3306/advjava";
     private String user = "root";
     private String password = "1234";
     private String driver = "com.mysql.cj.jdbc.Driver";
