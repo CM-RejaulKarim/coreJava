@@ -139,7 +139,7 @@ public class Login extends javax.swing.JFrame {
     private void txtUserNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserNameKeyPressed
         // TODO add your handling code here:
         int key = evt.getKeyCode();
-        if (key == 10 || key == KeyEvent.VK_DOWN) {
+        if (key == 10) {
             txtUserPass.requestFocus();
         }
     }//GEN-LAST:event_txtUserNameKeyPressed
@@ -150,9 +150,7 @@ public class Login extends javax.swing.JFrame {
         if (key == 10) {
             btnLogin.requestFocus();
         }
-        if (key == KeyEvent.VK_UP) {
-            txtUserName.requestFocus();
-        }
+        
 
 
     }//GEN-LAST:event_txtUserPassKeyPressed

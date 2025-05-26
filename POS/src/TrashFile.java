@@ -26,4 +26,8 @@ public class TrashFile {
 //            }
 //        });
     } 
+//   if (key == KeyEvent.VK_UP) {
+//            txtUserName.requestFocus();
+//        }
+//   || key == KeyEvent.VK_DOWN
 }
