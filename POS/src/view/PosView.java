@@ -151,9 +151,9 @@ public class PosView extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         Stock = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        Report = new javax.swing.JPanel();
+        Product = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jPanel11 = new javax.swing.JPanel();
+        Report = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
 
         jButton2.setText("jButton2");
@@ -943,45 +943,45 @@ public class PosView extends javax.swing.JFrame {
 
         jLabel2.setText("product");
 
-        javax.swing.GroupLayout ReportLayout = new javax.swing.GroupLayout(Report);
-        Report.setLayout(ReportLayout);
-        ReportLayout.setHorizontalGroup(
-            ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ReportLayout.createSequentialGroup()
+        javax.swing.GroupLayout ProductLayout = new javax.swing.GroupLayout(Product);
+        Product.setLayout(ProductLayout);
+        ProductLayout.setHorizontalGroup(
+            ProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ProductLayout.createSequentialGroup()
                 .addGap(341, 341, 341)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(446, Short.MAX_VALUE))
         );
-        ReportLayout.setVerticalGroup(
-            ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ReportLayout.createSequentialGroup()
+        ProductLayout.setVerticalGroup(
+            ProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ProductLayout.createSequentialGroup()
                 .addGap(232, 232, 232)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(473, Short.MAX_VALUE))
         );
 
-        tabMain.addTab("Product", Report);
+        tabMain.addTab("Product", Product);
 
         jLabel24.setText("Report");
 
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
+        javax.swing.GroupLayout ReportLayout = new javax.swing.GroupLayout(Report);
+        Report.setLayout(ReportLayout);
+        ReportLayout.setHorizontalGroup(
+            ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ReportLayout.createSequentialGroup()
                 .addGap(290, 290, 290)
                 .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(505, Short.MAX_VALUE))
         );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
+        ReportLayout.setVerticalGroup(
+            ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ReportLayout.createSequentialGroup()
                 .addGap(217, 217, 217)
                 .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(379, Short.MAX_VALUE))
         );
 
-        tabMain.addTab("Report", jPanel11);
+        tabMain.addTab("Report", Report);
 
         getContentPane().add(tabMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 1130, 610));
 
@@ -1351,6 +1351,7 @@ public class PosView extends javax.swing.JFrame {
     private javax.swing.JPanel Customer;
     private javax.swing.JTable CustomerTable;
     private javax.swing.JPanel Main;
+    private javax.swing.JPanel Product;
     private javax.swing.JPanel Purchase;
     private javax.swing.JPanel Report;
     private javax.swing.JPanel Sale;
@@ -1419,7 +1420,6 @@ public class PosView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
