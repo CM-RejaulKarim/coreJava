@@ -150,7 +150,6 @@ public class Login extends javax.swing.JFrame {
         if (key == 10) {
             btnLogin.requestFocus();
         }
-        
 
 
     }//GEN-LAST:event_txtUserPassKeyPressed
@@ -166,7 +165,7 @@ public class Login extends javax.swing.JFrame {
             PosView pv = new PosView();
             dispose();
             pv.setVisible(true);
-        } else {
+        }  else {
             JOptionPane.showMessageDialog(this, "Please Enter Correct UserName And Password...");
         }
     }//GEN-LAST:event_btnLoginActionPerformed

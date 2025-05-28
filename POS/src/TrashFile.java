@@ -30,4 +30,24 @@ public class TrashFile {
 //            txtUserName.requestFocus();
 //        }
 //   || key == KeyEvent.VK_DOWN
+   
+//   public void userLoginIntoPos() {
+//
+//        btnCustomer.setVisible(false);
+//        btnSupplier.setVisible(false);
+//        btnCategory.setVisible(false);
+//        btnPurchase.setVisible(false);
+//        btnStock.setVisible(false);
+//
+//    }
+   
+   ///User & Password == user
+//        else if (userName.equalsIgnoreCase("user") && userPass.equalsIgnoreCase("user")) {
+//
+//            PosView pv = new PosView();
+//            dispose();
+//            pv.setVisible(true);
+//            pv.userLoginIntoPos();
+//
+//        }
 }

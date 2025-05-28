@@ -2,6 +2,7 @@ package entity;
 
 public class Stock {
 
+    private int id;
     private String productName;
     private float quantity;
     private String category;
@@ -9,10 +10,19 @@ public class Stock {
     public Stock() {
     }
 
-    public Stock(String productName, float quantity, String category) {
+    public Stock(int id, String productName, float quantity, String category) {
+        this.id = id;
         this.productName = productName;
         this.quantity = quantity;
         this.category = category;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getProductName() {
@@ -38,5 +48,7 @@ public class Stock {
     public void setCategory(String category) {
         this.category = category;
     }
+
+    
 
 }
