@@ -4,10 +4,20 @@
  */
 package util;
 
+import java.sql.Date;
+
 /**
  *
  * @author Admin
  */
 public class DateConvert {
-    
+
+    public Date utilDateToSqlDate(java.util.Date date) {
+
+        if (date == null) {
+            return null;
+        }
+        return new java.sql.Date(date.getTime());
+    }
+
 }
