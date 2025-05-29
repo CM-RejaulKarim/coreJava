@@ -4,9 +4,12 @@ import dao.CategoryDao;
 import dao.CustomerDao;
 import dao.ProductDao;
 import dao.PurchaseDao;
+import dao.StockDao;
 import dao.SupplierDao;
+import entity.Stock;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.List;
 import javax.swing.JOptionPane;
 import util.DatabaseUtil;
 
@@ -17,14 +20,15 @@ public class PosView extends javax.swing.JFrame {
     SupplierDao supplierDao = new SupplierDao();
     CategoryDao categoryDao = new CategoryDao();
     PurchaseDao purchaseDao = new PurchaseDao();
+    StockDao stockDao = new StockDao();
     ProductDao productDao = new ProductDao();
-    
 
     public PosView() {
         initComponents();
         customerDao.showAllCustomer(CustomerTable);
         supplierDao.showAllSupplier(supplierTable);
         categoryDao.showAllCategory(categoryTable);
+        productDao.showAllProduct(productTable);
         purchaseDao.loadCategory(comboPurchaseCategory);
         supplierDao.loadAllSupplierToPurchaseComboBox(comboPurchaseSupplierName);
         productDao.loadCategoryToProductCombo(comboProductCategory);
@@ -168,7 +172,7 @@ public class PosView extends javax.swing.JFrame {
         btnProductReset = new javax.swing.JButton();
         btnProductSave = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        tblProduct = new javax.swing.JTable();
+        productTable = new javax.swing.JTable();
         Report = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
 
@@ -1005,9 +1009,14 @@ public class PosView extends javax.swing.JFrame {
         jPanel11.add(btnProductReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 210, 90, 30));
 
         btnProductSave.setText("Save");
+        btnProductSave.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnProductSaveMouseClicked(evt);
+            }
+        });
         jPanel11.add(btnProductSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 90, 30));
 
-        tblProduct.setModel(new javax.swing.table.DefaultTableModel(
+        productTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -1018,7 +1027,7 @@ public class PosView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane4.setViewportView(tblProduct);
+        jScrollPane4.setViewportView(productTable);
 
         jPanel11.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 270, 840, 280));
 
@@ -1089,6 +1098,12 @@ public class PosView extends javax.swing.JFrame {
         txtCategoryName.setText("");
 
         btnCategorySave.setVisible(true);
+    }
+    public void resetProductForm() {
+        txtProductId.setText("");
+        txtProductProductName.setText("");
+
+        btnProductSave.setVisible(true);
     }
 
 
@@ -1381,11 +1396,39 @@ public class PosView extends javax.swing.JFrame {
         float totalPrice = Float.parseFloat(txtPurchaseTotalPrice.getText().trim());
 
         purchaseDao.SavePurchase(productName, unitprice, quantity, totalPrice, category, supplierName);
+       
+        // start stock update
+        List<Stock> slist= stockDao.getProductByCategory(category);
+        boolean status =false;
+        
+        for (Stock stock : slist) {
+            if (productName.equals(stock.getProductName())) {
+                status = true;
+                break;
+            }
+        }
+        if (status) {
+            stockDao.updateStockQuantityByProductName(productName, quantity);
+        }
+        
     }//GEN-LAST:event_btnPurchaseConfirmMouseClicked
 
     private void comboProductCategoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboProductCategoryMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_comboProductCategoryMouseClicked
+
+    private void btnProductSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductSaveMouseClicked
+        // TODO add your handling code here:
+
+        String productName = txtProductProductName.getText().trim();
+        String category = comboProductCategory.getSelectedItem().toString();
+
+        productDao.saveProduct(productName, category);
+        resetProductForm();
+        productDao.showAllProduct(productTable);
+        
+        stockDao.saveStock(productName, 0, category);
+    }//GEN-LAST:event_btnProductSaveMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1517,9 +1560,9 @@ public class PosView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable productTable;
     private javax.swing.JTable supplierTable;
     private javax.swing.JTabbedPane tabMain;
-    private javax.swing.JTable tblProduct;
     private javax.swing.JTextField txtCategoryId;
     private javax.swing.JTextField txtCategoryName;
     private javax.swing.JTextField txtCustomerAddress;
