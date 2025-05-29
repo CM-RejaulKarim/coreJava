@@ -26,6 +26,7 @@ public class PurchaseDao {
         List<Stock> stockList = stockDao.getProductByCategory(category);
 
         if (stockList.isEmpty()) {
+            //JOptionPane.showMessageDialog(null, "No Product Found");
             System.out.println("No Product Found");
             return;
         }
@@ -43,7 +44,7 @@ public class PurchaseDao {
         List<Category> catList = categoryDao.getAllCategory();
 
         if (catList.isEmpty()) {
-            System.out.println("No Category Found");
+            JOptionPane.showMessageDialog(null, "No Category Found");
             return;
         }
         for (Category cat : catList) {

@@ -93,7 +93,7 @@ public class CategoryDao {
     }
 
     public void editCategory(int id, String name, JTable jt) {
-        String sql = "update category set name=?";
+        String sql = "update category set name=? where id=?";
 
         try {
             ps = util.getCon().prepareStatement(sql);
