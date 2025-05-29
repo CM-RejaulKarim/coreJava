@@ -863,12 +863,22 @@ public class PosView extends javax.swing.JFrame {
         jPanel8.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 70, 30));
 
         comboPurchaseCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboPurchaseCategory.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                comboPurchaseCategoryMouseClicked(evt);
+            }
+        });
         jPanel8.add(comboPurchaseCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 160, 30));
 
         jLabel22.setText("Product Name");
         jPanel8.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 90, 30));
 
         comboPurchaseProductName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboPurchaseProductName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                comboPurchaseProductNameMouseClicked(evt);
+            }
+        });
         jPanel8.add(comboPurchaseProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 160, 160, 30));
 
         jLabel26.setText("Supplier Name");
@@ -1429,6 +1439,14 @@ public class PosView extends javax.swing.JFrame {
         
         stockDao.saveStock(productName, 0, category);
     }//GEN-LAST:event_btnProductSaveMouseClicked
+
+    private void comboPurchaseCategoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboPurchaseCategoryMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboPurchaseCategoryMouseClicked
+
+    private void comboPurchaseProductNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboPurchaseProductNameMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboPurchaseProductNameMouseClicked
 
     /**
      * @param args the command line arguments
