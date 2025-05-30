@@ -70,7 +70,7 @@ public class ProductDao {
     
     public void showAllProduct(JTable jt) {
 
-        String[] columnsName = {"ID", "product Name", "category"};
+        String[] columnsName = {"ID", "Product Name", "Category"};
         DefaultTableModel tableModel = new DefaultTableModel(columnsName, 0);
         jt.setModel(tableModel);
 

@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import util.DatabaseUtil;
 
 /**
@@ -87,6 +89,34 @@ public class StockDao {
             ps.close();
             util.getCon().close();
 
+        } catch (SQLException ex) {
+            Logger.getLogger(StockDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void getAllStock(JTable jt) {
+
+        String[] columnsName = {"ID", "Product Name","Quantity", "Category"};
+        DefaultTableModel tableModel = new DefaultTableModel(columnsName, 0);
+        jt.setModel(tableModel);
+
+        sql = "select * from stock order by quantity desc, productName";
+
+        try {
+            ps = util.getCon().prepareStatement(sql);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                int id = rs.getInt("id");
+                String productName = rs.getString("productName");
+                float quantity = rs.getFloat("quantity");
+                String category = rs.getString("category");
+
+                Object[] rowData = {id, productName,quantity,category};
+                tableModel.addRow(rowData);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(StockDao.class.getName()).log(Level.SEVERE, null, ex);
         }
