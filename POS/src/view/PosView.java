@@ -4,14 +4,17 @@ import dao.CategoryDao;
 import dao.CustomerDao;
 import dao.ProductDao;
 import dao.PurchaseDao;
+import dao.ReportDao;
 import dao.StockDao;
 import dao.SupplierDao;
 import entity.Stock;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import util.DatabaseUtil;
+import util.DateConvert;
 
 public class PosView extends javax.swing.JFrame {
 
@@ -22,6 +25,8 @@ public class PosView extends javax.swing.JFrame {
     PurchaseDao purchaseDao = new PurchaseDao();
     StockDao stockDao = new StockDao();
     ProductDao productDao = new ProductDao();
+    DateConvert dateConvert= new DateConvert();
+    ReportDao reportDao = new ReportDao();
 
     public PosView() {
         initComponents();
@@ -32,7 +37,7 @@ public class PosView extends javax.swing.JFrame {
         purchaseDao.loadCategory(comboPurchaseCategory);
         supplierDao.loadAllSupplierToPurchaseComboBox(comboPurchaseSupplierName);
         productDao.loadCategoryToProductCombo(comboProductCategory);
-        
+
         stockDao.getAllStock(tblStock);
 
         comboPurchaseCategory.addItemListener(new ItemListener() {
@@ -182,7 +187,19 @@ public class PosView extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         productTable = new javax.swing.JTable();
         Report = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
+        dateReportFrom = new com.toedter.calendar.JDateChooser();
+        jLabel33 = new javax.swing.JLabel();
+        dateReportTo = new com.toedter.calendar.JDateChooser();
+        jPanel14 = new javax.swing.JPanel();
+        jLabel34 = new javax.swing.JLabel();
+        btnReportPurchase = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tblReport = new javax.swing.JTable();
+        btnReportSale = new javax.swing.JButton();
+        btnReportStock = new javax.swing.JButton();
+        btnReportCustomerAdd = new javax.swing.JButton();
         Userdetail = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -1100,23 +1117,94 @@ public class PosView extends javax.swing.JFrame {
 
         tabMain.addTab("Product", Product);
 
-        jLabel24.setText("Report");
+        jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel24.setText("From");
+        jPanel13.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, 30, 40));
+        jPanel13.add(dateReportFrom, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 140, 40));
+
+        jLabel33.setText("To");
+        jPanel13.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 150, 40, 40));
+        jPanel13.add(dateReportTo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 150, 140, 40));
+
+        jPanel14.setBackground(new java.awt.Color(105, 76, 76));
+
+        jLabel34.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel34.setText("Report");
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel13.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1120, -1));
+
+        btnReportPurchase.setText("Purchase");
+        btnReportPurchase.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReportPurchaseMouseClicked(evt);
+            }
+        });
+        jPanel13.add(btnReportPurchase, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, 100, 40));
+
+        tblReport.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane6.setViewportView(tblReport);
+
+        jPanel13.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 340, 950, 260));
+
+        btnReportSale.setText("Sale");
+        btnReportSale.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReportSaleMouseClicked(evt);
+            }
+        });
+        jPanel13.add(btnReportSale, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 250, 100, 40));
+
+        btnReportStock.setText("Stock");
+        btnReportStock.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReportStockMouseClicked(evt);
+            }
+        });
+        jPanel13.add(btnReportStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 250, 100, 40));
+
+        btnReportCustomerAdd.setText("CustomerAdd");
+        btnReportCustomerAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReportCustomerAddMouseClicked(evt);
+            }
+        });
+        jPanel13.add(btnReportCustomerAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 250, -1, 40));
 
         javax.swing.GroupLayout ReportLayout = new javax.swing.GroupLayout(Report);
         Report.setLayout(ReportLayout);
         ReportLayout.setHorizontalGroup(
             ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ReportLayout.createSequentialGroup()
-                .addGap(290, 290, 290)
-                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(505, Short.MAX_VALUE))
+            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         ReportLayout.setVerticalGroup(
             ReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ReportLayout.createSequentialGroup()
-                .addGap(217, 217, 217)
-                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(379, Short.MAX_VALUE))
+            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         tabMain.addTab("Report", Report);
@@ -1176,6 +1264,7 @@ public class PosView extends javax.swing.JFrame {
 
         btnCategorySave.setVisible(true);
     }
+
     public void resetProductForm() {
         txtProductId.setText("");
         txtProductProductName.setText("");
@@ -1473,11 +1562,11 @@ public class PosView extends javax.swing.JFrame {
         float totalPrice = Float.parseFloat(txtPurchaseTotalPrice.getText().trim());
 
         purchaseDao.SavePurchase(productName, unitprice, quantity, totalPrice, category, supplierName);
-       
+
         // start stock update
-        List<Stock> slist= stockDao.getProductByCategory(category);
-        boolean status =false;
-        
+        List<Stock> slist = stockDao.getProductByCategory(category);
+        boolean status = false;
+
         for (Stock stock : slist) {
             if (productName.equals(stock.getProductName())) {
                 status = true;
@@ -1487,7 +1576,9 @@ public class PosView extends javax.swing.JFrame {
         if (status) {
             stockDao.updateStockQuantityByProductName(productName, quantity);
         }
-        
+
+        stockDao.getAllStock(tblStock);
+
     }//GEN-LAST:event_btnPurchaseConfirmMouseClicked
 
     private void comboProductCategoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboProductCategoryMouseClicked
@@ -1503,7 +1594,7 @@ public class PosView extends javax.swing.JFrame {
         productDao.saveProduct(productName, category);
         resetProductForm();
         productDao.showAllProduct(productTable);
-        
+
         stockDao.saveStock(productName, 0, category);
     }//GEN-LAST:event_btnProductSaveMouseClicked
 
@@ -1511,6 +1602,31 @@ public class PosView extends javax.swing.JFrame {
         // TODO add your handling code here:
         tabMain.setSelectedIndex(9);
     }//GEN-LAST:event_btnUserDetailsMouseClicked
+
+    private void btnReportPurchaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportPurchaseMouseClicked
+        // TODO add your handling code here:
+        
+        Date fromDate =dateReportFrom.getDate();
+        Date toDate =dateReportTo.getDate();
+        
+        java.sql.Date from= dateConvert.utilDateToSqlDate(fromDate);
+        java.sql.Date to= dateConvert.utilDateToSqlDate(toDate);
+        
+       // purchaseDao.purchaseReportByDate(from, to, tblReport);
+        reportDao.generatePDFReportForPurchase(from, to, tblReport);
+    }//GEN-LAST:event_btnReportPurchaseMouseClicked
+
+    private void btnReportSaleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportSaleMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReportSaleMouseClicked
+
+    private void btnReportStockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportStockMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReportStockMouseClicked
+
+    private void btnReportCustomerAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportCustomerAddMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReportCustomerAddMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1581,6 +1697,10 @@ public class PosView extends javax.swing.JFrame {
     private javax.swing.JButton btnPurchaseConfirm;
     private javax.swing.JButton btnPurchaseReset;
     private javax.swing.JButton btnReport;
+    private javax.swing.JButton btnReportCustomerAdd;
+    private javax.swing.JButton btnReportPurchase;
+    private javax.swing.JButton btnReportSale;
+    private javax.swing.JButton btnReportStock;
     private javax.swing.JButton btnSale;
     private javax.swing.JButton btnStock;
     private javax.swing.JButton btnSupplier;
@@ -1595,6 +1715,8 @@ public class PosView extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboPurchaseCategory;
     private javax.swing.JComboBox<String> comboPurchaseProductName;
     private javax.swing.JComboBox<String> comboPurchaseSupplierName;
+    private com.toedter.calendar.JDateChooser dateReportFrom;
+    private com.toedter.calendar.JDateChooser dateReportTo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -1626,6 +1748,8 @@ public class PosView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1636,6 +1760,8 @@ public class PosView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1649,9 +1775,11 @@ public class PosView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable productTable;
     private javax.swing.JTable supplierTable;
     private javax.swing.JTabbedPane tabMain;
+    private javax.swing.JTable tblReport;
     private javax.swing.JTable tblStock;
     private javax.swing.JTextField txtCategoryId;
     private javax.swing.JTextField txtCategoryName;

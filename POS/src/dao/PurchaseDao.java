@@ -2,13 +2,17 @@ package dao;
 
 import entity.Category;
 import entity.Stock;
+import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import util.DatabaseUtil;
 
 public class PurchaseDao {
@@ -78,5 +82,40 @@ public class PurchaseDao {
             Logger.getLogger(PurchaseDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    public void purchaseReportByDate(Date from, Date to, JTable jt) {
+
+        String[] columnsName = {"Product Name", "Unit Price", "Quantity", "Total Price", "Category", "Supplier", "Date"};
+        DefaultTableModel tableModel = new DefaultTableModel(columnsName, 0);
+        jt.setModel(tableModel);
+
+        sql = "select * from purchase where date between ? and ?";
+
+        try {
+            ps = util.getCon().prepareStatement(sql);
+
+            ps.setDate(1, from);
+            ps.setDate(2, to);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                String productName = rs.getString("name");
+                float unitPrice = rs.getFloat("unitPrice");
+                float quantity = rs.getFloat("quantity");
+                float totalPrice = rs.getFloat("totalPrice");
+                String category = rs.getString("category");
+                String supplier = rs.getString("supplier");
+                Date date = rs.getDate("date");
+
+                Object[] rowData = {productName, unitPrice, quantity, totalPrice, category, supplier, date};
+                tableModel.addRow(rowData);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PurchaseDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
