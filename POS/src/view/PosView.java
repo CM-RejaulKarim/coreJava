@@ -39,10 +39,11 @@ public class PosView extends javax.swing.JFrame {
         purchaseDao.loadCategory(comboPurchaseCategory);
         supplierDao.loadAllSupplierToPurchaseComboBox(comboPurchaseSupplierName);
         productDao.loadCategoryToProductCombo(comboProductCategory);
+        saleDao.loadProductInSellCombo(comboSaleProductName);
 
         stockDao.getAllStock(tblStock);
         saleDao.getAllStockInSaleTable(tblSaleAllProducts);
-        saleDao.saleProductSelected(productName, TOP_ALIGNMENT, TOP_ALIGNMENT, TOP_ALIGNMENT, tblStock);
+       
 
         comboPurchaseCategory.addItemListener(new ItemListener() {
             @Override
@@ -183,6 +184,10 @@ public class PosView extends javax.swing.JFrame {
         ProductName1 = new javax.swing.JLabel();
         ProductName2 = new javax.swing.JLabel();
         txtSaleQuantity = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        comboSaleCustomerName = new javax.swing.JComboBox<>();
+        jLabel36 = new javax.swing.JLabel();
+        comboSaleProductName = new javax.swing.JComboBox<>();
         Stock = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -1017,7 +1022,7 @@ public class PosView extends javax.swing.JFrame {
         });
         jScrollPane7.setViewportView(tblSaleAllProducts);
 
-        jPanel15.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 490, 320));
+        jPanel15.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 490, 250));
 
         tblSaleSelectedProducts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1032,7 +1037,7 @@ public class PosView extends javax.swing.JFrame {
         ));
         jScrollPane8.setViewportView(tblSaleSelectedProducts);
 
-        jPanel15.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 240, 490, 320));
+        jPanel15.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 310, 490, 250));
 
         btnSaleConfirm.setText("Confirm");
         btnSaleConfirm.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1040,22 +1045,34 @@ public class PosView extends javax.swing.JFrame {
                 btnSaleConfirmMouseClicked(evt);
             }
         });
-        jPanel15.add(btnSaleConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 150, 100, 40));
+        jPanel15.add(btnSaleConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 220, 100, 40));
 
         btnSaleRemove.setText("Remove");
-        jPanel15.add(btnSaleRemove, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 150, 100, 40));
+        jPanel15.add(btnSaleRemove, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 130, 100, 40));
 
         ProductName.setText("Product Name");
-        jPanel15.add(ProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 80, 30));
-        jPanel15.add(txtSaleProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 130, 30));
-        jPanel15.add(txtSaleUnitPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 130, 30));
+        jPanel15.add(ProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 80, 30));
+        jPanel15.add(txtSaleProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 130, 30));
+        jPanel15.add(txtSaleUnitPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, 130, 30));
 
         ProductName1.setText("Unit Price");
-        jPanel15.add(ProductName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, 60, 30));
+        jPanel15.add(ProductName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, 60, 30));
 
         ProductName2.setText("Quantity");
-        jPanel15.add(ProductName2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 150, 50, 30));
-        jPanel15.add(txtSaleQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 150, 130, 30));
+        jPanel15.add(ProductName2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 220, 50, 30));
+        jPanel15.add(txtSaleQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 220, 130, 30));
+
+        jLabel25.setText("Customer Name");
+        jPanel15.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 90, 30));
+
+        comboSaleCustomerName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel15.add(comboSaleCustomerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 170, 30));
+
+        jLabel36.setText("Product Name");
+        jPanel15.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 140, 90, 30));
+
+        comboSaleProductName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel15.add(comboSaleProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 140, 170, 30));
 
         javax.swing.GroupLayout SaleLayout = new javax.swing.GroupLayout(Sale);
         Sale.setLayout(SaleLayout);
@@ -1835,6 +1852,8 @@ public class PosView extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboPurchaseCategory;
     private javax.swing.JComboBox<String> comboPurchaseProductName;
     private javax.swing.JComboBox<String> comboPurchaseSupplierName;
+    private javax.swing.JComboBox<String> comboSaleCustomerName;
+    private javax.swing.JComboBox<String> comboSaleProductName;
     private com.toedter.calendar.JDateChooser dateReportFrom;
     private com.toedter.calendar.JDateChooser dateReportTo;
     private javax.swing.JButton jButton1;
@@ -1859,6 +1878,7 @@ public class PosView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
@@ -1870,6 +1890,7 @@ public class PosView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

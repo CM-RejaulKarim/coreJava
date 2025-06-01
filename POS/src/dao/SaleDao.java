@@ -4,11 +4,14 @@
  */
 package dao;
 
+import entity.Stock;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -24,6 +27,8 @@ public class SaleDao {
     PreparedStatement ps;
     String sql;
     ResultSet rs;
+    
+    StockDao stockDao = new StockDao();
 
     public void getAllStockInSaleTable(JTable jt) {
 
@@ -79,6 +84,23 @@ public class SaleDao {
             //JOptionPane.showMessageDialog(null, "Product Not Added");
             Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+     public void loadProductInSellCombo(JComboBox<String> comboproductList) {
+        comboproductList.removeAllItems();
+
+        List<Stock> productList = stockDao.getProductForSale();
+
+        if (productList.isEmpty()) {
+            //JOptionPane.showMessageDialog(null, "No Product Found");
+            System.out.println("No Product Found");
+            return;
+        }
+        for (Stock s : productList) {
+
+            comboproductList.addItem(s.getProductName());
+        }
+
     }
 
 //    public void showAllSoldProduct(JTable jt) {
