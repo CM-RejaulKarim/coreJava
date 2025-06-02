@@ -1022,36 +1022,33 @@ public class PosView extends javax.swing.JFrame {
                 btnSaleConfirmMouseClicked(evt);
             }
         });
-        jPanel15.add(btnSaleConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 240, 100, 40));
+        jPanel15.add(btnSaleConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, 100, 40));
 
         btnSaleReset.setText("Reset");
-        jPanel15.add(btnSaleReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 240, 100, 40));
-        jPanel15.add(txtSaleUnitPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 130, 30));
+        jPanel15.add(btnSaleReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 300, 100, 40));
+        jPanel15.add(txtSaleUnitPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 170, 130, 30));
 
         ProductName1.setText("Unit Price");
-        jPanel15.add(ProductName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 60, 30));
+        jPanel15.add(ProductName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 170, 60, 30));
 
         ProductName2.setText("Quantity");
-        jPanel15.add(ProductName2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, 50, 30));
+        jPanel15.add(ProductName2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 170, 50, 30));
 
         txtSaleQuantity.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtSaleQuantityFocusGained(evt);
-            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtSaleQuantityFocusLost(evt);
             }
         });
-        jPanel15.add(txtSaleQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, 130, 30));
+        jPanel15.add(txtSaleQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 170, 130, 30));
 
         jLabel25.setText("Customer Name");
-        jPanel15.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 90, 30));
+        jPanel15.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 90, 30));
 
         comboSaleCustomerName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel15.add(comboSaleCustomerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 170, 30));
+        jPanel15.add(comboSaleCustomerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 160, 30));
 
         jLabel36.setText("Product Name");
-        jPanel15.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 120, 90, 30));
+        jPanel15.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, 90, 30));
 
         comboSaleProductName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboSaleProductName.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -1059,38 +1056,38 @@ public class PosView extends javax.swing.JFrame {
                 comboSaleProductNameFocusLost(evt);
             }
         });
-        jPanel15.add(comboSaleProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 120, 170, 30));
+        jPanel15.add(comboSaleProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, 170, 30));
 
         jLabel37.setText("Category");
-        jPanel15.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, 50, 30));
+        jPanel15.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 50, 30));
 
         comboSaleCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel15.add(comboSaleCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, 170, 30));
+        jPanel15.add(comboSaleCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 170, 30));
 
         jLabel38.setText("Stock");
-        jPanel15.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 120, 50, 30));
+        jPanel15.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 120, 50, 30));
 
         lblSaleStock.setBackground(new java.awt.Color(204, 255, 255));
         lblSaleStock.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jPanel15.add(lblSaleStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 120, 100, 30));
+        jPanel15.add(lblSaleStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 120, 100, 30));
 
         ProductName3.setText("Total Price");
-        jPanel15.add(ProductName3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 180, 80, 30));
-        jPanel15.add(txtSaleTotalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 180, 130, 30));
+        jPanel15.add(ProductName3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 80, 30));
+        jPanel15.add(txtSaleTotalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 130, 30));
 
         ProductName4.setText("Diiscount (%)");
-        jPanel15.add(ProductName4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 80, 30));
+        jPanel15.add(ProductName4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 230, 80, 30));
 
         txtSaleDiseount.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtSaleDiseountFocusLost(evt);
             }
         });
-        jPanel15.add(txtSaleDiseount, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 130, 30));
+        jPanel15.add(txtSaleDiseount, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 230, 130, 30));
 
         ProductName5.setText("Actual Price");
-        jPanel15.add(ProductName5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 240, 70, 30));
-        jPanel15.add(txtSaleActualPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 240, 130, 30));
+        jPanel15.add(ProductName5, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 230, 70, 30));
+        jPanel15.add(txtSaleActualPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 230, 130, 30));
 
         javax.swing.GroupLayout SaleLayout = new javax.swing.GroupLayout(Sale);
         Sale.setLayout(SaleLayout);
@@ -1814,15 +1811,10 @@ public class PosView extends javax.swing.JFrame {
 
     private void comboSaleProductNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboSaleProductNameFocusLost
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_comboSaleProductNameFocusLost
-
-    private void txtSaleQuantityFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSaleQuantityFocusGained
-        // TODO add your handling code here:
         String productName = comboSaleProductName.getSelectedItem().toString();
         float quantity= saleDao.getQuantityByProductName(productName);
         lblSaleStock.setText(String.valueOf(quantity));
-    }//GEN-LAST:event_txtSaleQuantityFocusGained
+    }//GEN-LAST:event_comboSaleProductNameFocusLost
 
     /**
      * @param args the command line arguments

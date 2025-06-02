@@ -81,27 +81,29 @@ public class SaleDao {
             comboCategoryList.addItem(cat.getName());
         }
     }
-    public float getQuantityByProductName(String productName){
+
+    public float getQuantityByProductName(String productName) {
         sql = "select quantity from stock where productName=?";
-        float quantity =0;
-    
+        float quantity = 0;
+
         try {
             ps = util.getCon().prepareStatement(sql);
-            
+            ps.setString(1, productName);
+
             ResultSet rs = ps.executeQuery();
-            
-            quantity=rs.getFloat("quantity");
-            
-            
+
+            while (rs.next()) {
+                quantity = rs.getFloat("quantity");
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(SaleDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return quantity;
     }
-    
-    
-    public void verifyAndUpdateStockBeforeSale(String productName, float quantity){
-        
+
+    public void verifyAndUpdateStockBeforeSale(String productName, float quantity) {
+
         sql = "update stock set quantity = quantity-? where productName=?";
 
         try {
@@ -118,11 +120,10 @@ public class SaleDao {
         } catch (SQLException ex) {
             Logger.getLogger(StockDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
-    
+
     }
 
-    public void saveSale(String customerName,String productName, float unitPrice, float quantity, float totalPrice) {
+    public void saveSale(String customerName, String productName, float unitPrice, float quantity, float totalPrice) {
 
         sql = "insert into sale(customerName, productName, unitPrice, quantity, totalPrice) values(?,?,?,?,?)";
 
