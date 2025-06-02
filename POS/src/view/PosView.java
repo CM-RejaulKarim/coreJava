@@ -1035,6 +1035,9 @@ public class PosView extends javax.swing.JFrame {
         jPanel15.add(ProductName2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, 50, 30));
 
         txtSaleQuantity.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtSaleQuantityFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtSaleQuantityFocusLost(evt);
             }
@@ -1051,6 +1054,11 @@ public class PosView extends javax.swing.JFrame {
         jPanel15.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 120, 90, 30));
 
         comboSaleProductName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboSaleProductName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                comboSaleProductNameFocusLost(evt);
+            }
+        });
         jPanel15.add(comboSaleProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 120, 170, 30));
 
         jLabel37.setText("Category");
@@ -1767,12 +1775,14 @@ public class PosView extends javax.swing.JFrame {
                 break;
             }
         }
-        if (status) {
-//            if (!saleDao.verifyAndUpdateStockBeforeSale(productName, quantity)) {
+//        float stockQuantity= saleDao.verifyAndUpdateStockBeforeSale(productName, quantity);
+//        
+//        if (status) {
+//            if (stockQuantity)) {
 //            } else {
 //                saleDao.saveSale(customerName, productName, unitPrice, quantity, totalPrice);
 //            }
-        }
+//        }
 
         stockDao.getAllStock(tblStock);
     }//GEN-LAST:event_btnSaleConfirmMouseClicked
@@ -1801,6 +1811,18 @@ public class PosView extends javax.swing.JFrame {
 
         txtSaleActualPrice.setText(String.valueOf(actualPrice));
     }//GEN-LAST:event_txtSaleDiseountFocusLost
+
+    private void comboSaleProductNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboSaleProductNameFocusLost
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_comboSaleProductNameFocusLost
+
+    private void txtSaleQuantityFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSaleQuantityFocusGained
+        // TODO add your handling code here:
+        String productName = comboSaleProductName.getSelectedItem().toString();
+        float quantity= saleDao.getQuantityByProductName(productName);
+        lblSaleStock.setText(String.valueOf(quantity));
+    }//GEN-LAST:event_txtSaleQuantityFocusGained
 
     /**
      * @param args the command line arguments

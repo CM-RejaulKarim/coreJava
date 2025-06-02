@@ -81,6 +81,25 @@ public class SaleDao {
             comboCategoryList.addItem(cat.getName());
         }
     }
+    public float getQuantityByProductName(String productName){
+        sql = "select quantity from stock where productName=?";
+        float quantity =0;
+    
+        try {
+            ps = util.getCon().prepareStatement(sql);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            quantity=rs.getFloat("quantity");
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(SaleDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return quantity;
+    }
+    
+    
     public void verifyAndUpdateStockBeforeSale(String productName, float quantity){
         
         sql = "update stock set quantity = quantity-? where productName=?";
