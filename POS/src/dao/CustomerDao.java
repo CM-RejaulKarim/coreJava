@@ -1,8 +1,12 @@
 package dao;
 
+import entity.Customer;
+import entity.Stock;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -14,6 +18,8 @@ public class CustomerDao {
 
     DatabaseUtil util = new DatabaseUtil();
     PreparedStatement ps;
+    String sql;
+    ResultSet rs;
 
     public void saveCustomer(String name, String email, String cell, String address, JTable jt) {
         String sql = "insert into customer(name, cell, address, email) values(?,?,?,?)";
@@ -127,7 +133,7 @@ public class CustomerDao {
         try {
             ps = util.getCon().prepareStatement(sql);
             ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
 
             while (rs.next()) {
                 return new Object[]{
@@ -147,6 +153,32 @@ public class CustomerDao {
         }
 
         return null;
+    }
+
+    public List<Customer> getAllCustomer() {
+
+        List<Customer> customerList = new ArrayList<>();
+        sql = "select * from customer";
+
+        try {
+            ps = util.getCon().prepareStatement(sql);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String cell = rs.getString("cell");
+                String email = rs.getString("email");
+                String address = rs.getString("address");
+
+                customerList.add(new Customer(id, name, cell, email, address));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return customerList;
     }
 
 }

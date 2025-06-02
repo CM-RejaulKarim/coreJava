@@ -96,7 +96,7 @@ public class StockDao {
 
     public void getAllStock(JTable jt) {
 
-        String[] columnsName = {"ID", "Product Name","Quantity", "Category"};
+        String[] columnsName = {"ID", "Product Name", "Quantity", "Category"};
         DefaultTableModel tableModel = new DefaultTableModel(columnsName, 0);
         jt.setModel(tableModel);
 
@@ -114,32 +114,12 @@ public class StockDao {
                 float quantity = rs.getFloat("quantity");
                 String category = rs.getString("category");
 
-                Object[] rowData = {id, productName,quantity,category};
+                Object[] rowData = {id, productName, quantity, category};
                 tableModel.addRow(rowData);
             }
         } catch (SQLException ex) {
             Logger.getLogger(StockDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public List<Stock> getProductForSale() {
 
-        List<Stock> stockList = new ArrayList<>();
-        sql = "select productName from stock";
-
-        try {
-            ps = util.getCon().prepareStatement(sql);
-
-            rs = ps.executeQuery();
-
-            while (rs.next()) {
-                Stock s = new Stock();
-                s.getProductName();
-                
-                stockList.add(s);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(StockDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return stockList;
-    }
 }

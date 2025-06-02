@@ -39,11 +39,10 @@ public class PosView extends javax.swing.JFrame {
         purchaseDao.loadCategory(comboPurchaseCategory);
         supplierDao.loadAllSupplierToPurchaseComboBox(comboPurchaseSupplierName);
         productDao.loadCategoryToProductCombo(comboProductCategory);
-        saleDao.loadProductInSellCombo(comboSaleProductName);
+        saleDao.loadCategoryInSale(comboSaleCategory);
+        saleDao.loadCustomerInSale(comboSaleCustomerName);
 
         stockDao.getAllStock(tblStock);
-        saleDao.getAllStockInSaleTable(tblSaleAllProducts);
-       
 
         comboPurchaseCategory.addItemListener(new ItemListener() {
             @Override
@@ -51,6 +50,15 @@ public class PosView extends javax.swing.JFrame {
 
                 String categoryName = comboPurchaseCategory.getSelectedItem().toString();
                 purchaseDao.loadProduct(comboPurchaseProductName, categoryName);
+
+            }
+        });
+        comboSaleCategory.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+
+                String categoryName = comboSaleCategory.getSelectedItem().toString();
+                saleDao.loadProductInSale(comboSaleProductName, categoryName);
 
             }
         });
@@ -172,14 +180,8 @@ public class PosView extends javax.swing.JFrame {
         jPanel15 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        tblSaleAllProducts = new javax.swing.JTable();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        tblSaleSelectedProducts = new javax.swing.JTable();
         btnSaleConfirm = new javax.swing.JButton();
-        btnSaleRemove = new javax.swing.JButton();
-        ProductName = new javax.swing.JLabel();
-        txtSaleProductName = new javax.swing.JTextField();
+        btnSaleReset = new javax.swing.JButton();
         txtSaleUnitPrice = new javax.swing.JTextField();
         ProductName1 = new javax.swing.JLabel();
         ProductName2 = new javax.swing.JLabel();
@@ -188,6 +190,16 @@ public class PosView extends javax.swing.JFrame {
         comboSaleCustomerName = new javax.swing.JComboBox<>();
         jLabel36 = new javax.swing.JLabel();
         comboSaleProductName = new javax.swing.JComboBox<>();
+        jLabel37 = new javax.swing.JLabel();
+        comboSaleCategory = new javax.swing.JComboBox<>();
+        jLabel38 = new javax.swing.JLabel();
+        lblSaleStock = new javax.swing.JLabel();
+        ProductName3 = new javax.swing.JLabel();
+        txtSaleTotalPrice = new javax.swing.JTextField();
+        ProductName4 = new javax.swing.JLabel();
+        txtSaleDiseount = new javax.swing.JTextField();
+        ProductName5 = new javax.swing.JLabel();
+        txtSaleActualPrice = new javax.swing.JTextField();
         Stock = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -1004,75 +1016,73 @@ public class PosView extends javax.swing.JFrame {
 
         jPanel15.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1130, -1));
 
-        tblSaleAllProducts.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tblSaleAllProducts.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblSaleAllProductsMouseClicked(evt);
-            }
-        });
-        jScrollPane7.setViewportView(tblSaleAllProducts);
-
-        jPanel15.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 490, 250));
-
-        tblSaleSelectedProducts.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane8.setViewportView(tblSaleSelectedProducts);
-
-        jPanel15.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 310, 490, 250));
-
         btnSaleConfirm.setText("Confirm");
         btnSaleConfirm.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSaleConfirmMouseClicked(evt);
             }
         });
-        jPanel15.add(btnSaleConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 220, 100, 40));
+        jPanel15.add(btnSaleConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 240, 100, 40));
 
-        btnSaleRemove.setText("Remove");
-        jPanel15.add(btnSaleRemove, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 130, 100, 40));
-
-        ProductName.setText("Product Name");
-        jPanel15.add(ProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 80, 30));
-        jPanel15.add(txtSaleProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 130, 30));
-        jPanel15.add(txtSaleUnitPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, 130, 30));
+        btnSaleReset.setText("Reset");
+        jPanel15.add(btnSaleReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 240, 100, 40));
+        jPanel15.add(txtSaleUnitPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 130, 30));
 
         ProductName1.setText("Unit Price");
-        jPanel15.add(ProductName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, 60, 30));
+        jPanel15.add(ProductName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 60, 30));
 
         ProductName2.setText("Quantity");
-        jPanel15.add(ProductName2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 220, 50, 30));
-        jPanel15.add(txtSaleQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 220, 130, 30));
+        jPanel15.add(ProductName2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, 50, 30));
+
+        txtSaleQuantity.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSaleQuantityFocusLost(evt);
+            }
+        });
+        jPanel15.add(txtSaleQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, 130, 30));
 
         jLabel25.setText("Customer Name");
-        jPanel15.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 90, 30));
+        jPanel15.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 90, 30));
 
         comboSaleCustomerName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel15.add(comboSaleCustomerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 170, 30));
+        jPanel15.add(comboSaleCustomerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 170, 30));
 
         jLabel36.setText("Product Name");
-        jPanel15.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 140, 90, 30));
+        jPanel15.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 120, 90, 30));
 
         comboSaleProductName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel15.add(comboSaleProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 140, 170, 30));
+        jPanel15.add(comboSaleProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 120, 170, 30));
+
+        jLabel37.setText("Category");
+        jPanel15.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, 50, 30));
+
+        comboSaleCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel15.add(comboSaleCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, 170, 30));
+
+        jLabel38.setText("Stock");
+        jPanel15.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 120, 50, 30));
+
+        lblSaleStock.setBackground(new java.awt.Color(204, 255, 255));
+        lblSaleStock.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jPanel15.add(lblSaleStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 120, 100, 30));
+
+        ProductName3.setText("Total Price");
+        jPanel15.add(ProductName3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 180, 80, 30));
+        jPanel15.add(txtSaleTotalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 180, 130, 30));
+
+        ProductName4.setText("Diiscount (%)");
+        jPanel15.add(ProductName4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 80, 30));
+
+        txtSaleDiseount.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSaleDiseountFocusLost(evt);
+            }
+        });
+        jPanel15.add(txtSaleDiseount, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 130, 30));
+
+        ProductName5.setText("Actual Price");
+        jPanel15.add(ProductName5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 240, 70, 30));
+        jPanel15.add(txtSaleActualPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 240, 130, 30));
 
         javax.swing.GroupLayout SaleLayout = new javax.swing.GroupLayout(Sale);
         Sale.setLayout(SaleLayout);
@@ -1737,28 +1747,60 @@ public class PosView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnReportCustomerAddMouseClicked
 
-    private void tblSaleAllProductsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSaleAllProductsMouseClicked
-        // TODO add your handling code here:
-
-        int rowindex = tblSaleAllProducts.getSelectedRow();
-
-        String productName = tblSaleAllProducts.getModel().getValueAt(rowindex,1).toString();
-
-        txtSaleProductName.setText(productName);
-
-    }//GEN-LAST:event_tblSaleAllProductsMouseClicked
-
     private void btnSaleConfirmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaleConfirmMouseClicked
         // TODO add your handling code here:
-
-        String productName = txtSaleProductName.getText().trim();
+        
+        String category = comboSaleCategory.getSelectedItem().toString();
+        String customerName = comboSaleCustomerName.getSelectedItem().toString();
+        String productName = comboSaleProductName.getSelectedItem().toString();
         float unitPrice = Float.parseFloat(txtSaleUnitPrice.getText().trim());
         float quantity = Float.parseFloat(txtSaleQuantity.getText().trim());
-        float totalPrice = unitPrice * quantity;
+        float totalPrice = Float.parseFloat(txtSaleActualPrice.getText().trim());
 
-        saleDao.saleProductSelected(productName, quantity, unitPrice, totalPrice, tblSaleSelectedProducts);
+        // start stock update
+        List<Stock> slist = stockDao.getProductByCategory(category);
+        boolean status = false;
 
+        for (Stock stock : slist) {
+            if (productName.equals(stock.getProductName())) {
+                status = true;
+                break;
+            }
+        }
+        if (status) {
+//            if (!saleDao.verifyAndUpdateStockBeforeSale(productName, quantity)) {
+//            } else {
+//                saleDao.saveSale(customerName, productName, unitPrice, quantity, totalPrice);
+//            }
+        }
+
+        stockDao.getAllStock(tblStock);
     }//GEN-LAST:event_btnSaleConfirmMouseClicked
+
+    private void txtSaleQuantityFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSaleQuantityFocusLost
+        // TODO add your handling code here:
+
+        float unitPrice = Float.parseFloat(txtSaleUnitPrice.getText().trim());
+        float Quantity = Float.parseFloat(txtSaleQuantity.getText().trim());
+
+        float totalPrice = unitPrice * Quantity;
+
+        txtSaleTotalPrice.setText(String.valueOf(totalPrice));
+    }//GEN-LAST:event_txtSaleQuantityFocusLost
+
+    private void txtSaleDiseountFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSaleDiseountFocusLost
+        // TODO add your handling code here:
+
+        float unitPrice = Float.parseFloat(txtSaleUnitPrice.getText().trim());
+        float Quantity = Float.parseFloat(txtSaleQuantity.getText().trim());
+
+        float totalPrice = unitPrice * Quantity;
+        float discount = Float.parseFloat(txtSaleDiseount.getText().trim());
+
+        float actualPrice = (float) Math.ceil(totalPrice - (totalPrice * (discount / 100)));
+
+        txtSaleActualPrice.setText(String.valueOf(actualPrice));
+    }//GEN-LAST:event_txtSaleDiseountFocusLost
 
     /**
      * @param args the command line arguments
@@ -1802,9 +1844,11 @@ public class PosView extends javax.swing.JFrame {
     private javax.swing.JTable CustomerTable;
     private javax.swing.JPanel Main;
     private javax.swing.JPanel Product;
-    private javax.swing.JLabel ProductName;
     private javax.swing.JLabel ProductName1;
     private javax.swing.JLabel ProductName2;
+    private javax.swing.JLabel ProductName3;
+    private javax.swing.JLabel ProductName4;
+    private javax.swing.JLabel ProductName5;
     private javax.swing.JPanel Purchase;
     private javax.swing.JPanel Report;
     private javax.swing.JPanel Sale;
@@ -1838,7 +1882,7 @@ public class PosView extends javax.swing.JFrame {
     private javax.swing.JButton btnReportStock;
     private javax.swing.JButton btnSale;
     private javax.swing.JButton btnSaleConfirm;
-    private javax.swing.JButton btnSaleRemove;
+    private javax.swing.JButton btnSaleReset;
     private javax.swing.JButton btnStock;
     private javax.swing.JButton btnSupplier;
     private javax.swing.JButton btnSupplierDelete;
@@ -1852,6 +1896,7 @@ public class PosView extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboPurchaseCategory;
     private javax.swing.JComboBox<String> comboPurchaseProductName;
     private javax.swing.JComboBox<String> comboPurchaseSupplierName;
+    private javax.swing.JComboBox<String> comboSaleCategory;
     private javax.swing.JComboBox<String> comboSaleCustomerName;
     private javax.swing.JComboBox<String> comboSaleProductName;
     private com.toedter.calendar.JDateChooser dateReportFrom;
@@ -1891,6 +1936,8 @@ public class PosView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1919,14 +1966,11 @@ public class PosView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JLabel lblSaleStock;
     private javax.swing.JTable productTable;
     private javax.swing.JTable supplierTable;
     private javax.swing.JTabbedPane tabMain;
     private javax.swing.JTable tblReport;
-    private javax.swing.JTable tblSaleAllProducts;
-    private javax.swing.JTable tblSaleSelectedProducts;
     private javax.swing.JTable tblStock;
     private javax.swing.JTextField txtCategoryId;
     private javax.swing.JTextField txtCategoryName;
@@ -1940,8 +1984,10 @@ public class PosView extends javax.swing.JFrame {
     private javax.swing.JTextField txtPurchaseQuantity;
     private javax.swing.JTextField txtPurchaseTotalPrice;
     private javax.swing.JTextField txtPurchaseUnitPrice;
-    private javax.swing.JTextField txtSaleProductName;
+    private javax.swing.JTextField txtSaleActualPrice;
+    private javax.swing.JTextField txtSaleDiseount;
     private javax.swing.JTextField txtSaleQuantity;
+    private javax.swing.JTextField txtSaleTotalPrice;
     private javax.swing.JTextField txtSaleUnitPrice;
     private javax.swing.JTextField txtSupplierAddress;
     private javax.swing.JTextField txtSupplierCell;
